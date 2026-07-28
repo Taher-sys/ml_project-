@@ -1,0 +1,20 @@
+{
+  "bayesian_bnn": {
+    "accuracy": 0.9806666666666667,
+    "precision": 0.84375,
+    "recall": 0.5294117647058824,
+    "f1_score": 0.6506024096385542,
+    "roc_auc": 0.9846547314578005,
+    "calibration_ece": 0.01024113304975132
+  },
+  "baseline_nn": {
+    "accuracy": 0.98,
+    "precision": 0.7692307692307693,
+    "recall": 0.5882352941176471,
+    "f1_score": 0.6666666666666666,
+    "roc_auc": 0.9826384660144252,
+    "calibration_ece": 0.008148386582111318
+  },
+  "test_sample_count": 1500,
+  "test_positive_count": 51
+}

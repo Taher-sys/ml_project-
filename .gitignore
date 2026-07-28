@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+.env
+*.pt
+*.pkl
+models/*.pt
+models/*.pkl
+models/*.json
+backend/data/*.zip
+backend/data/*.csv
+
+# Node / Next.js
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/.env.local
+
+# IDE & OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
