@@ -21,6 +21,7 @@ export const PredictionResponseSchema = z.object({
   prediction: z.enum(["failure", "normal"]),
   shap_contributions: z.array(ShapContributionSchema),
   recommendation: z.string(),
+  safety_measures: z.array(z.string()).default([]),
 });
 
 export type SensorFormValues = z.infer<typeof SensorInputSchema>;

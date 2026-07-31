@@ -7,7 +7,7 @@ from app.core.schemas import SensorInput, PredictionResponse
 from app.ml.preprocess import transform_single_input, load_raw_dataset, prepare_features_and_target
 from app.ml.model import BayesianNeuralNetwork
 from app.ml.uncertainty import predict_with_uncertainty
-from app.ml.recommend import generate_recommendation
+from app.ml.recommend import generate_recommendation, get_safety_measures
 from app.main import app
 
 
@@ -59,3 +59,23 @@ def test_api_health_endpoint():
     assert response.status_code == 200
     data = response.json()
     assert data["status"] == "ok"
+
+
+def test_safety_measures():
+    shap_sample = [
+        {"feature": "tool_wear", "value": 0.45},
+        {"feature": "torque", "value": 0.30},
+        {"feature": "rotational_speed", "value": -0.15},
+    ]
+
+    # When prediction is "no failure" -> empty list
+    measures_no_failure = get_safety_measures(shap_sample, "no failure")
+    assert measures_no_failure == []
+
+    # When prediction is "failure" -> non-empty and contains base safety line
+    measures_failure = get_safety_measures(shap_sample, "failure")
+    assert len(measures_failure) > 0
+    assert "Notify the responsible technician and log this event before continued operation." in measures_failure
+    assert any("tool wear" in m.lower() for m in measures_failure)
+    assert any("torque" in m.lower() for m in measures_failure)
+

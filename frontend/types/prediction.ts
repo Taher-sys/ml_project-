@@ -21,6 +21,7 @@ export interface PredictionResult {
   prediction: "failure" | "normal";
   shap_contributions: ShapContributionData[];
   recommendation: string;
+  safety_measures: string[];
 }
 
 export interface ModelInfoMetrics {

@@ -16,7 +16,7 @@ from app.ml.preprocess import transform_single_input, load_raw_dataset, prepare_
 from app.ml.model import BayesianNeuralNetwork
 from app.ml.uncertainty import predict_with_uncertainty
 from app.ml.explain import ShapExplainerWrapper
-from app.ml.recommend import generate_recommendation
+from app.ml.recommend import generate_recommendation, get_safety_measures
 from app.utils.logger import logger
 
 router = APIRouter(prefix="/api", tags=["Predictive Maintenance API"])
@@ -63,7 +63,7 @@ async def get_model_info():
 async def predict_single(sensor_input: SensorInput):
     """
     Predicts machine failure probability, quantifies epistemic uncertainty via MC Dropout,
-    computes SHAP attributions, and returns a confidence-aware recommendation.
+    computes SHAP attributions, returns confidence-aware recommendations, and provides safety measures.
     """
     model, scaler = get_model_and_scaler()
 
@@ -85,6 +85,9 @@ async def predict_single(sensor_input: SensorInput):
             confidence_score=unc_res["confidence_score"],
         )
 
+        # 4. Targeted Safety Measures for Failure Predictions
+        safety = get_safety_measures(shap_list, unc_res["prediction"])
+
         return PredictionResponse(
             failure_probability=unc_res["mean_probability"],
             confidence_score=unc_res["confidence_score"],
@@ -92,6 +95,7 @@ async def predict_single(sensor_input: SensorInput):
             prediction=unc_res["prediction"],
             shap_contributions=shap_list,
             recommendation=rec,
+            safety_measures=safety,
         )
     except Exception as e:
         logger.error(f"Prediction endpoint error: {e}", exc_info=True)

@@ -10,6 +10,7 @@ import { PredictionCard } from "@/components/PredictionCard";
 import { UncertaintyGauge } from "@/components/UncertaintyGauge";
 import { ShapExplanationChart } from "@/components/ShapExplanationChart";
 import { RecommendationPanel } from "@/components/RecommendationPanel";
+import { SafetyMeasuresPanel } from "@/components/SafetyMeasuresPanel";
 
 import { Cpu, Activity, Info, Server, RefreshCw, AlertCircle } from "lucide-react";
 
@@ -129,6 +130,9 @@ export default function DashboardPage() {
 
           {/* Action Recommendation Banner */}
           <RecommendationPanel recommendation={prediction?.recommendation ?? null} />
+
+          {/* Safety Measures Panel (Only renders for failure predictions) */}
+          <SafetyMeasuresPanel safety_measures={prediction?.safety_measures} />
 
           {/* SHAP Feature Attribution Chart */}
           <ShapExplanationChart contributions={prediction?.shap_contributions ?? []} />

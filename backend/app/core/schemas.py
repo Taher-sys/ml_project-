@@ -63,6 +63,7 @@ class PredictionResponse(BaseModel):
     prediction: Literal["failure", "normal"] = Field(..., description="Binary prediction label")
     shap_contributions: List[ShapContribution] = Field(..., description="Feature attribution scores via SHAP")
     recommendation: str = Field(..., description="Confidence-aware maintenance action recommendation")
+    safety_measures: List[str] = Field(default_factory=list, description="Specific safety measures to prevent/mitigate failure")
 
 
 class HealthResponse(BaseModel):
