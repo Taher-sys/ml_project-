@@ -15,9 +15,11 @@ class ShapExplainerWrapper:
         self.model.eval()
         self.model.enable_mc_dropout(False)  # Deterministic mode for SHAP attribution speed
 
-        # Subsample background data to keep explanation sub-2s fast
+        # Subsample background data deterministically using fixed seed
+        np.random.seed(42)
         if len(background_samples) > 50:
-            indices = np.random.choice(len(background_samples), size=50, replace=False)
+            rng = np.random.default_rng(42)
+            indices = rng.choice(len(background_samples), size=50, replace=False)
             self.background = background_samples[indices]
         else:
             self.background = background_samples
@@ -38,6 +40,8 @@ class ShapExplainerWrapper:
         Returns:
             List of dicts: [{'feature': 'tool_wear', 'value': 0.31}, ...] sorted by absolute magnitude.
         """
+        # Set seed prior to shap_values computation for 100% deterministic sampling
+        np.random.seed(42)
         shap_values = self.explainer.shap_values(x, nsamples=100)
 
         # Ensure sv is a 1D numpy array of shape (n_features,)

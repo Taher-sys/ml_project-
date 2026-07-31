@@ -102,9 +102,14 @@ export const SensorInputForm: React.FC<SensorInputFormProps> = ({ onSubmit, isLo
   const [detectedHeaders, setDetectedHeaders] = useState<string[]>([]);
 
   const handleChange = (field: keyof SensorInputData, value: string | number) => {
+    let finalVal = value;
+    if (field !== "type") {
+      const parsed = typeof value === "number" ? value : parseFloat(value);
+      finalVal = isNaN(parsed) ? 0 : parsed;
+    }
     setFormData((prev) => ({
       ...prev,
-      [field]: typeof value === "number" ? value : value,
+      [field]: finalVal,
     }));
   };
 
@@ -115,7 +120,15 @@ export const SensorInputForm: React.FC<SensorInputFormProps> = ({ onSubmit, isLo
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(formData);
+    const cleanData: SensorInputData = {
+      air_temperature: isNaN(formData.air_temperature) ? 300.0 : formData.air_temperature,
+      process_temperature: isNaN(formData.process_temperature) ? 310.0 : formData.process_temperature,
+      rotational_speed: isNaN(formData.rotational_speed) ? 1500 : formData.rotational_speed,
+      torque: isNaN(formData.torque) ? 40.0 : formData.torque,
+      tool_wear: isNaN(formData.tool_wear) ? 100 : formData.tool_wear,
+      type: formData.type || "M",
+    };
+    onSubmit(cleanData);
   };
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {

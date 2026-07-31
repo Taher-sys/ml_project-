@@ -15,10 +15,10 @@ export const ShapContributionSchema = z.object({
 });
 
 export const PredictionResponseSchema = z.object({
-  failure_probability: z.number().min(0).max(1),
-  confidence_score: z.number().min(0).max(1),
-  uncertainty_std: z.number().min(0),
-  prediction: z.enum(["failure", "normal"]),
+  failure_probability: z.number(),
+  confidence_score: z.number(),
+  uncertainty_std: z.number(),
+  prediction: z.string(),
   shap_contributions: z.array(ShapContributionSchema),
   recommendation: z.string(),
   safety_measures: z.array(z.string()).default([]),

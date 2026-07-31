@@ -7,6 +7,7 @@ from app.core.schemas import SensorInput, PredictionResponse
 from app.ml.preprocess import transform_single_input, load_raw_dataset, prepare_features_and_target
 from app.ml.model import BayesianNeuralNetwork
 from app.ml.uncertainty import predict_with_uncertainty
+from app.ml.explain import ShapExplainerWrapper
 from app.ml.recommend import generate_recommendation, get_safety_measures
 from app.main import app
 
@@ -78,4 +79,21 @@ def test_safety_measures():
     assert "Notify the responsible technician and log this event before continued operation." in measures_failure
     assert any("tool wear" in m.lower() for m in measures_failure)
     assert any("torque" in m.lower() for m in measures_failure)
+
+
+def test_shap_explainability_determinism():
+    model = BayesianNeuralNetwork(input_dim=8)
+    background = np.random.randn(20, 8).astype(np.float32)
+    explainer = ShapExplainerWrapper(model, background)
+
+    dummy_sample = np.random.randn(1, 8).astype(np.float32)
+
+    exp1 = explainer.explain(dummy_sample)
+    exp2 = explainer.explain(dummy_sample)
+
+    assert len(exp1) == len(exp2)
+    for c1, c2 in zip(exp1, exp2):
+        assert c1["feature"] == c2["feature"]
+        assert abs(c1["value"] - c2["value"]) < 1e-6
+
 
