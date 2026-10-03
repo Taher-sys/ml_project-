@@ -14,6 +14,14 @@ export interface ShapContributionData {
   value: number;
 }
 
+export interface FailureModeDiagnosisSummary {
+  code: "TWF" | "HDF" | "PWF" | "OSF" | "RNF" | "NONE";
+  name: string;
+  shortName: string;
+  description: string;
+  indicators: string[];
+}
+
 export interface PredictionResult {
   failure_probability: number;
   confidence_score: number;
@@ -22,6 +30,7 @@ export interface PredictionResult {
   shap_contributions: ShapContributionData[];
   recommendation: string;
   safety_measures: string[];
+  failure_mode?: FailureModeDiagnosisSummary;
 }
 
 export interface ModelInfoMetrics {

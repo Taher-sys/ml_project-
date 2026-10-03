@@ -31,7 +31,7 @@ const FEATURE_LABELS: Record<string, string> = {
 export const ShapExplanationChart: React.FC<ShapExplanationChartProps> = ({ contributions }) => {
   if (!contributions || contributions.length === 0) {
     return (
-      <div className="glass-panel rounded-2xl p-6 shadow-xl flex items-center justify-center text-slate-500 text-xs h-64 border border-slate-800">
+      <div className="rounded-2xl p-6 border border-zinc-800 bg-zinc-950/70 backdrop-blur-md flex items-center justify-center text-zinc-500 text-xs h-64 font-mono">
         No SHAP attribution data available for current prediction.
       </div>
     );
@@ -47,24 +47,24 @@ export const ShapExplanationChart: React.FC<ShapExplanationChartProps> = ({ cont
     <motion.div
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.1 }}
-      className="glass-panel rounded-2xl p-6 shadow-2xl relative overflow-hidden"
+      transition={{ duration: 0.3 }}
+      className="rounded-2xl p-6 border border-zinc-800 bg-zinc-950/80 backdrop-blur-xl shadow-xl space-y-4"
     >
-      <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-zinc-800">
         <div>
-          <h3 className="text-sm font-bold text-slate-100 flex items-center gap-2">
+          <h3 className="text-sm font-bold text-zinc-100 flex items-center gap-2 font-mono">
             <Sparkles className="w-4 h-4 text-cyan-400" /> SHAP Feature Attribution
           </h3>
-          <p className="text-xs text-slate-400 mt-0.5">
-            Local explanation showing features driving failure vs normal prediction
+          <p className="text-xs text-zinc-400 mt-0.5">
+            Local additive feature explanations for failure versus nominal classification
           </p>
         </div>
-        <div className="flex items-center gap-3 text-[10px] font-semibold uppercase tracking-wider">
-          <span className="flex items-center gap-1 text-rose-400">
-            <span className="w-2 h-2 rounded-full bg-rose-500 inline-block"></span> Increases Failure Risk
+        <div className="flex items-center gap-3 text-[10px] font-mono font-semibold uppercase tracking-wider">
+          <span className="flex items-center gap-1.5 text-red-400">
+            <span className="w-2 h-2 rounded-full bg-red-500 inline-block"></span> Drives Failure Risk
           </span>
-          <span className="flex items-center gap-1 text-emerald-400">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span> Promotes Safe Operation
+          <span className="flex items-center gap-1.5 text-emerald-400">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span> Promotes Nominal
           </span>
         </div>
       </div>
@@ -74,19 +74,21 @@ export const ShapExplanationChart: React.FC<ShapExplanationChartProps> = ({ cont
           <BarChart
             layout="vertical"
             data={chartData}
-            margin={{ top: 5, right: 30, left: 90, bottom: 5 }}
+            margin={{ top: 5, right: 30, left: 85, bottom: 5 }}
           >
             <XAxis
               type="number"
               stroke="#64748b"
               fontSize={11}
+              fontFamily="monospace"
               tickFormatter={(val) => val.toFixed(2)}
             />
             <YAxis
               type="category"
               dataKey="name"
               stroke="#cbd5e1"
-              fontSize={12}
+              fontSize={11}
+              fontFamily="monospace"
               tickLine={false}
               axisLine={false}
             />
@@ -95,10 +97,10 @@ export const ShapExplanationChart: React.FC<ShapExplanationChartProps> = ({ cont
                 if (active && payload && payload.length) {
                   const data = payload[0].payload;
                   return (
-                    <div className="bg-slate-900 border border-slate-700 p-2.5 rounded-xl shadow-xl text-xs">
-                      <p className="font-bold text-slate-200">{data.name}</p>
-                      <p className={`font-mono-numeric ${data.isPositive ? "text-rose-400" : "text-emerald-400"}`}>
-                        SHAP Impact Value: {data.value >= 0 ? `+${data.value}` : data.value}
+                    <div className="bg-zinc-900 border border-zinc-700 p-2.5 rounded-xl shadow-xl text-xs font-mono">
+                      <p className="font-bold text-zinc-200">{data.name}</p>
+                      <p className={`font-mono-numeric mt-0.5 ${data.isPositive ? "text-red-400" : "text-emerald-400"}`}>
+                        SHAP Impact Value: {data.value >= 0 ? `+${data.value.toFixed(4)}` : data.value.toFixed(4)}
                       </p>
                     </div>
                   );
@@ -106,7 +108,7 @@ export const ShapExplanationChart: React.FC<ShapExplanationChartProps> = ({ cont
                 return null;
               }}
             />
-            <ReferenceLine x={0} stroke="#475569" strokeDasharray="3 3" />
+            <ReferenceLine x={0} stroke="#334155" strokeDasharray="3 3" />
             <Bar dataKey="value" radius={[4, 4, 4, 4]}>
               {chartData.map((entry, index) => (
                 <Cell

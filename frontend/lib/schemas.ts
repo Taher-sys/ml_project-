@@ -14,14 +14,28 @@ export const ShapContributionSchema = z.object({
   value: z.number(),
 });
 
-export const PredictionResponseSchema = z.object({
-  failure_probability: z.number(),
-  confidence_score: z.number(),
-  uncertainty_std: z.number(),
-  prediction: z.string(),
-  shap_contributions: z.array(ShapContributionSchema),
-  recommendation: z.string(),
-  safety_measures: z.array(z.string()).default([]),
-});
+export const FailureModeDiagnosisSchema = z
+  .object({
+    code: z.enum(["TWF", "HDF", "PWF", "OSF", "RNF", "NONE"]),
+    name: z.string(),
+    short_name: z.string().optional(),
+    shortName: z.string().optional(),
+    description: z.string().optional().default(""),
+    indicators: z.array(z.string()).default([]),
+  })
+  .passthrough();
+
+export const PredictionResponseSchema = z
+  .object({
+    failure_probability: z.number(),
+    confidence_score: z.number(),
+    uncertainty_std: z.number(),
+    prediction: z.enum(["failure", "normal"]),
+    shap_contributions: z.array(ShapContributionSchema).default([]),
+    recommendation: z.string().default("Safe to operate"),
+    safety_measures: z.array(z.string()).default([]),
+    failure_mode: FailureModeDiagnosisSchema.optional(),
+  })
+  .passthrough();
 
 export type SensorFormValues = z.infer<typeof SensorInputSchema>;

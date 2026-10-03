@@ -1,6 +1,7 @@
 import os
 import zipfile
 import urllib.request
+from typing import List
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler
@@ -154,3 +155,30 @@ def transform_single_input(sensor_input: SensorInput, scaler: StandardScaler) ->
 
     full_features = np.hstack([numeric_scaled, categorical_vals])
     return full_features
+
+
+def transform_batch_input(sensor_inputs: List[SensorInput], scaler: StandardScaler) -> np.ndarray:
+    """Transforms a list of SensorInput objects into a 2D numpy array [N, 8] for vectorized batch inference."""
+    numeric_list = []
+    cat_list = []
+
+    for inp in sensor_inputs:
+        numeric_list.append([
+            inp.air_temperature,
+            inp.process_temperature,
+            inp.rotational_speed,
+            inp.torque,
+            inp.tool_wear,
+        ])
+        cat_list.append([
+            1.0 if inp.type == "H" else 0.0,
+            1.0 if inp.type == "L" else 0.0,
+            1.0 if inp.type == "M" else 0.0,
+        ])
+
+    numeric_arr = np.array(numeric_list, dtype=np.float32)
+    numeric_scaled = scaler.transform(numeric_arr)
+    cat_arr = np.array(cat_list, dtype=np.float32)
+
+    return np.hstack([numeric_scaled, cat_arr])
+
