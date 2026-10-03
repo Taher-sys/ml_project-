@@ -32,7 +32,7 @@ export const CustomCursor: React.FC = () => {
 
   return (
     <motion.div
-      className="pointer-events-none fixed top-0 left-0 z-50 rounded-full bg-[#D4F63C]/10 border border-[#D4F63C]/40"
+      className="pointer-events-none fixed top-0 left-0 z-50 rounded-full bg-[#10B981]/15 border border-[#10B981]/50"
       style={{
         x: cursorX,
         y: cursorY,

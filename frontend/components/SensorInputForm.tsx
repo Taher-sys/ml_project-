@@ -23,8 +23,8 @@ interface SensorInputFormProps {
 const PRESETS: { label: string; icon: React.ReactNode; color: string; data: SensorInputData }[] = [
   {
     label: "Nominal Baseline",
-    icon: <Gauge className="w-4 h-4 text-[#D4F63C]" />,
-    color: "border-[#2A3241] bg-[#13171D] hover:border-[#D4F63C] text-[#EDEDED]",
+    icon: <Gauge className="w-4 h-4 text-[#10B981]" />,
+    color: "border-[#2A3241] bg-[#13171D] hover:border-[#10B981] text-[#EDEDED]",
     data: {
       air_temperature: 298.1,
       process_temperature: 308.6,
@@ -129,7 +129,7 @@ export const SensorInputForm: React.FC<SensorInputFormProps> = ({
       <div className="flex items-center justify-between pb-4 border-b border-[#2A3241]">
         <div>
           <h2 className="text-lg md:text-xl font-bold text-[#EDEDED] flex items-center gap-2.5 font-mono">
-            <div className="p-2 rounded-lg bg-[#13171D] border border-[#2A3241] text-[#D4F63C]">
+            <div className="p-2 rounded-lg bg-[#13171D] border border-[#2A3241] text-[#10B981]">
               <Sliders className="w-5 h-5" />
             </div>
             Telemetry Simulation
@@ -145,7 +145,7 @@ export const SensorInputForm: React.FC<SensorInputFormProps> = ({
             variant="outline"
             size="sm"
             onClick={onSwitchToBatch}
-            className="text-xs font-mono h-8 gap-1.5 border-[#2A3241] bg-[#13171D] text-[#D4F63C] hover:bg-[#181D24]"
+            className="text-xs font-mono h-8 gap-1.5 border-[#2A3241] bg-[#13171D] text-[#10B981] hover:bg-[#181D24]"
           >
             <FileSpreadsheet className="w-3.5 h-3.5" />
             Fleet Batch
@@ -179,7 +179,7 @@ export const SensorInputForm: React.FC<SensorInputFormProps> = ({
         <div className="space-y-1.5">
           <div className="flex justify-between items-center text-xs font-mono">
             <span className="text-[#EDEDED] font-medium">Air Temperature [K]</span>
-            <span className="text-[#D4F63C] font-bold">{formData.air_temperature.toFixed(1)} K</span>
+            <span className="text-[#10B981] font-bold">{formData.air_temperature.toFixed(1)} K</span>
           </div>
           <div className="flex items-center gap-3">
             <input
@@ -189,14 +189,14 @@ export const SensorInputForm: React.FC<SensorInputFormProps> = ({
               step="0.1"
               value={formData.air_temperature}
               onChange={(e) => handleChange("air_temperature", parseFloat(e.target.value))}
-              className="w-full accent-[#D4F63C] h-1.5 bg-[#13171D] rounded cursor-pointer"
+              className="w-full accent-[#10B981] h-1.5 bg-[#13171D] rounded cursor-pointer"
             />
             <input
               type="number"
               step="0.1"
               value={formData.air_temperature}
               onChange={(e) => handleChange("air_temperature", parseFloat(e.target.value))}
-              className="w-20 bg-[#13171D] border border-[#2A3241] rounded-lg px-2.5 py-1 text-xs text-[#EDEDED] font-mono text-right focus:outline-none focus:border-[#D4F63C]"
+              className="w-20 bg-[#13171D] border border-[#2A3241] rounded-lg px-2.5 py-1 text-xs text-[#EDEDED] font-mono text-right focus:outline-none focus:border-[#10B981]"
             />
           </div>
         </div>
@@ -205,7 +205,7 @@ export const SensorInputForm: React.FC<SensorInputFormProps> = ({
         <div className="space-y-1.5">
           <div className="flex justify-between items-center text-xs font-mono">
             <span className="text-[#EDEDED] font-medium">Process Temperature [K]</span>
-            <span className="text-[#D4F63C] font-bold">{formData.process_temperature.toFixed(1)} K</span>
+            <span className="text-[#10B981] font-bold">{formData.process_temperature.toFixed(1)} K</span>
           </div>
           <div className="flex items-center gap-3">
             <input
@@ -215,14 +215,14 @@ export const SensorInputForm: React.FC<SensorInputFormProps> = ({
               step="0.1"
               value={formData.process_temperature}
               onChange={(e) => handleChange("process_temperature", parseFloat(e.target.value))}
-              className="w-full accent-[#D4F63C] h-1.5 bg-[#13171D] rounded cursor-pointer"
+              className="w-full accent-[#10B981] h-1.5 bg-[#13171D] rounded cursor-pointer"
             />
             <input
               type="number"
               step="0.1"
               value={formData.process_temperature}
               onChange={(e) => handleChange("process_temperature", parseFloat(e.target.value))}
-              className="w-20 bg-[#13171D] border border-[#2A3241] rounded-lg px-2.5 py-1 text-xs text-[#EDEDED] font-mono text-right focus:outline-none focus:border-[#D4F63C]"
+              className="w-20 bg-[#13171D] border border-[#2A3241] rounded-lg px-2.5 py-1 text-xs text-[#EDEDED] font-mono text-right focus:outline-none focus:border-[#10B981]"
             />
           </div>
         </div>
@@ -231,7 +231,7 @@ export const SensorInputForm: React.FC<SensorInputFormProps> = ({
         <div className="space-y-1.5">
           <div className="flex justify-between items-center text-xs font-mono">
             <span className="text-[#EDEDED] font-medium">Rotational Speed [rpm]</span>
-            <span className="text-[#D4F63C] font-bold">{formData.rotational_speed} rpm</span>
+            <span className="text-[#10B981] font-bold">{formData.rotational_speed} rpm</span>
           </div>
           <div className="flex items-center gap-3">
             <input
@@ -241,14 +241,14 @@ export const SensorInputForm: React.FC<SensorInputFormProps> = ({
               step="10"
               value={formData.rotational_speed}
               onChange={(e) => handleChange("rotational_speed", parseFloat(e.target.value))}
-              className="w-full accent-[#D4F63C] h-1.5 bg-[#13171D] rounded cursor-pointer"
+              className="w-full accent-[#10B981] h-1.5 bg-[#13171D] rounded cursor-pointer"
             />
             <input
               type="number"
               step="1"
               value={formData.rotational_speed}
               onChange={(e) => handleChange("rotational_speed", parseFloat(e.target.value))}
-              className="w-20 bg-[#13171D] border border-[#2A3241] rounded-lg px-2.5 py-1 text-xs text-[#EDEDED] font-mono text-right focus:outline-none focus:border-[#D4F63C]"
+              className="w-20 bg-[#13171D] border border-[#2A3241] rounded-lg px-2.5 py-1 text-xs text-[#EDEDED] font-mono text-right focus:outline-none focus:border-[#10B981]"
             />
           </div>
         </div>
@@ -257,7 +257,7 @@ export const SensorInputForm: React.FC<SensorInputFormProps> = ({
         <div className="space-y-1.5">
           <div className="flex justify-between items-center text-xs font-mono">
             <span className="text-[#EDEDED] font-medium">Torque [Nm]</span>
-            <span className="text-[#D4F63C] font-bold">{formData.torque.toFixed(1)} Nm</span>
+            <span className="text-[#10B981] font-bold">{formData.torque.toFixed(1)} Nm</span>
           </div>
           <div className="flex items-center gap-3">
             <input
@@ -267,14 +267,14 @@ export const SensorInputForm: React.FC<SensorInputFormProps> = ({
               step="0.5"
               value={formData.torque}
               onChange={(e) => handleChange("torque", parseFloat(e.target.value))}
-              className="w-full accent-[#D4F63C] h-1.5 bg-[#13171D] rounded cursor-pointer"
+              className="w-full accent-[#10B981] h-1.5 bg-[#13171D] rounded cursor-pointer"
             />
             <input
               type="number"
               step="0.1"
               value={formData.torque}
               onChange={(e) => handleChange("torque", parseFloat(e.target.value))}
-              className="w-20 bg-[#13171D] border border-[#2A3241] rounded-lg px-2.5 py-1 text-xs text-[#EDEDED] font-mono text-right focus:outline-none focus:border-[#D4F63C]"
+              className="w-20 bg-[#13171D] border border-[#2A3241] rounded-lg px-2.5 py-1 text-xs text-[#EDEDED] font-mono text-right focus:outline-none focus:border-[#10B981]"
             />
           </div>
         </div>
@@ -283,7 +283,7 @@ export const SensorInputForm: React.FC<SensorInputFormProps> = ({
         <div className="space-y-1.5">
           <div className="flex justify-between items-center text-xs font-mono">
             <span className="text-[#EDEDED] font-medium">Tool Wear [min]</span>
-            <span className="text-[#D4F63C] font-bold">{formData.tool_wear} min</span>
+            <span className="text-[#10B981] font-bold">{formData.tool_wear} min</span>
           </div>
           <div className="flex items-center gap-3">
             <input
@@ -293,14 +293,14 @@ export const SensorInputForm: React.FC<SensorInputFormProps> = ({
               step="1"
               value={formData.tool_wear}
               onChange={(e) => handleChange("tool_wear", parseFloat(e.target.value))}
-              className="w-full accent-[#D4F63C] h-1.5 bg-[#13171D] rounded cursor-pointer"
+              className="w-full accent-[#10B981] h-1.5 bg-[#13171D] rounded cursor-pointer"
             />
             <input
               type="number"
               step="1"
               value={formData.tool_wear}
               onChange={(e) => handleChange("tool_wear", parseFloat(e.target.value))}
-              className="w-20 bg-[#13171D] border border-[#2A3241] rounded-lg px-2.5 py-1 text-xs text-[#EDEDED] font-mono text-right focus:outline-none focus:border-[#D4F63C]"
+              className="w-20 bg-[#13171D] border border-[#2A3241] rounded-lg px-2.5 py-1 text-xs text-[#EDEDED] font-mono text-right focus:outline-none focus:border-[#10B981]"
             />
           </div>
         </div>
@@ -316,7 +316,7 @@ export const SensorInputForm: React.FC<SensorInputFormProps> = ({
                 onClick={() => handleChange("type", t)}
                 className={`py-2 px-3 rounded-lg border text-xs font-mono font-bold transition-colors cursor-pointer ${
                   formData.type === t
-                    ? "bg-[#13171D] border-[#D4F63C] text-[#D4F63C]"
+                    ? "bg-[#13171D] border-[#10B981] text-[#10B981]"
                     : "bg-[#13171D] border-[#2A3241] text-[#7E8B9B] hover:border-[#EDEDED] hover:text-[#EDEDED]"
                 }`}
               >
@@ -329,15 +329,15 @@ export const SensorInputForm: React.FC<SensorInputFormProps> = ({
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full mt-3 bg-[#D4F63C] hover:bg-[#CEF238] text-[#0D0F12] font-black py-3 rounded-lg flex items-center justify-center gap-2 transition-colors cursor-pointer disabled:opacity-40 font-mono text-xs uppercase tracking-wider"
+          className="w-full mt-3 bg-[#10B981] hover:bg-[#059669] text-[#0D1117] font-black py-3 rounded-lg flex items-center justify-center gap-2 transition-colors cursor-pointer disabled:opacity-40 font-mono text-xs uppercase tracking-wider"
         >
           {isLoading ? (
             <>
-              <RefreshCw className="w-4 h-4 animate-spin text-[#0D0F12]" /> Running Monte Carlo Simulation...
+              <RefreshCw className="w-4 h-4 animate-spin text-[#0D1117]" /> Running Monte Carlo Simulation...
             </>
           ) : (
             <>
-              <Zap className="w-4 h-4 text-[#0D0F12]" /> Run Bayesian Uncertainty Inference
+              <Zap className="w-4 h-4 text-[#0D1117]" /> Run Bayesian Uncertainty Inference
             </>
           )}
         </button>

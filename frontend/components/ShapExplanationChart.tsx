@@ -53,7 +53,7 @@ export const ShapExplanationChart: React.FC<ShapExplanationChartProps> = ({ cont
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-[#2A3241]">
         <div>
           <h3 className="text-sm font-bold text-[#EDEDED] flex items-center gap-2 font-mono">
-            <Sparkles className="w-4 h-4 text-[#D4F63C]" /> SHAP Feature Attribution
+            <Sparkles className="w-4 h-4 text-[#10B981]" /> SHAP Feature Attribution
           </h3>
           <p className="text-xs text-[#7E8B9B] mt-0.5">
             Local additive feature explanations for failure versus nominal classification
@@ -63,8 +63,8 @@ export const ShapExplanationChart: React.FC<ShapExplanationChartProps> = ({ cont
           <span className="flex items-center gap-1.5 text-[#FF3B30]">
             <span className="w-2 h-2 rounded-full bg-[#FF3B30] inline-block"></span> Drives Failure Risk
           </span>
-          <span className="flex items-center gap-1.5 text-[#D4F63C]">
-            <span className="w-2 h-2 rounded-full bg-[#D4F63C] inline-block"></span> Promotes Nominal
+          <span className="flex items-center gap-1.5 text-[#10B981]">
+            <span className="w-2 h-2 rounded-full bg-[#10B981] inline-block"></span> Promotes Nominal
           </span>
         </div>
       </div>
@@ -99,7 +99,7 @@ export const ShapExplanationChart: React.FC<ShapExplanationChartProps> = ({ cont
                   return (
                     <div className="bg-[#13171D] border border-[#2A3241] p-2.5 rounded shadow-xl text-xs font-mono">
                       <p className="font-bold text-[#EDEDED]">{data.name}</p>
-                      <p className={`font-mono-numeric mt-0.5 ${data.isPositive ? "text-[#FF3B30]" : "text-[#D4F63C]"}`}>
+                      <p className={`font-mono-numeric mt-0.5 ${data.isPositive ? "text-[#FF3B30]" : "text-[#10B981]"}`}>
                         SHAP Impact Value: {data.value >= 0 ? `+${data.value.toFixed(4)}` : data.value.toFixed(4)}
                       </p>
                     </div>
@@ -113,7 +113,7 @@ export const ShapExplanationChart: React.FC<ShapExplanationChartProps> = ({ cont
               {chartData.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
-                  fill={entry.isPositive ? "#FF3B30" : "#D4F63C"}
+                  fill={entry.isPositive ? "#FF3B30" : "#10B981"}
                 />
               ))}
             </Bar>

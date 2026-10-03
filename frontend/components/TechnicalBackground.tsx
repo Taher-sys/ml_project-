@@ -95,39 +95,58 @@ export const TechnicalBackground: React.FC = () => {
       }
       ctx.stroke();
 
-      // --- 3. Concentric Radar CAD Geometry (Offset Upper Right) ---
+      // --- 3. Concentric Radar CAD Geometry (Primary Offset Upper Right) ---
       const radarCenterX = width * 0.78;
       const radarCenterY = height * 0.24;
       const maxRadius = Math.min(width, height) * 0.45;
 
-      ctx.strokeStyle = "rgba(42, 50, 65, 0.45)"; // #2A3241
-      ctx.lineWidth = 1;
+      // Primary concentric radar range rings with enhanced 1.75px stroke & 0.25 opacity
+      ctx.strokeStyle = "rgba(20, 184, 166, 0.26)"; // Clean slate teal / emerald telemetry
+      ctx.lineWidth = 1.75;
 
-      // Concentric range rings
-      for (let r = 80; r <= maxRadius; r += 90) {
+      for (let r = 70; r <= maxRadius; r += 85) {
         ctx.beginPath();
         ctx.arc(radarCenterX, radarCenterY, r, 0, Math.PI * 2);
         ctx.stroke();
       }
 
-      // Radar Axis Crosshair
+      // Secondary Concentric CAD Rings (Lower Left telemetry node)
+      const secCenterX = width * 0.16;
+      const secCenterY = height * 0.74;
+      const secMaxRadius = Math.min(width, height) * 0.32;
+      ctx.strokeStyle = "rgba(16, 185, 129, 0.24)"; // Muted industrial emerald
+      ctx.lineWidth = 1.5;
+
+      for (let r = 50; r <= secMaxRadius; r += 70) {
+        ctx.beginPath();
+        ctx.arc(secCenterX, secCenterY, r, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+
+      // Radar Axis Crosshairs
+      ctx.strokeStyle = "rgba(126, 139, 155, 0.25)";
+      ctx.lineWidth = 1.5;
       ctx.beginPath();
       ctx.setLineDash([4, 6]);
       ctx.moveTo(radarCenterX - maxRadius - 20, radarCenterY);
       ctx.lineTo(radarCenterX + maxRadius + 20, radarCenterY);
       ctx.moveTo(radarCenterX, radarCenterY - maxRadius - 20);
       ctx.lineTo(radarCenterX, radarCenterY + maxRadius + 20);
+      ctx.moveTo(secCenterX - secMaxRadius - 15, secCenterY);
+      ctx.lineTo(secCenterX + secMaxRadius + 15, secCenterY);
+      ctx.moveTo(secCenterX, secCenterY - secMaxRadius - 15);
+      ctx.lineTo(secCenterX, secCenterY + secMaxRadius + 15);
       ctx.stroke();
       ctx.setLineDash([]); // Reset line dash
 
-      // Slow Radial Sweep (Opacity 15-20%)
+      // Slow Radial Sweep (Muted Industrial Emerald / Teal, Opacity 18%)
       const sweepLength = maxRadius * 1.05;
       const sweepEndX = radarCenterX + Math.cos(sweepAngle) * sweepLength;
       const sweepEndY = radarCenterY + Math.sin(sweepAngle) * sweepLength;
 
       const sweepGradient = ctx.createLinearGradient(radarCenterX, radarCenterY, sweepEndX, sweepEndY);
-      sweepGradient.addColorStop(0, "rgba(212, 246, 60, 0.18)"); // #D4F63C volt
-      sweepGradient.addColorStop(1, "rgba(212, 246, 60, 0.0)");
+      sweepGradient.addColorStop(0, "rgba(16, 185, 129, 0.20)"); // Muted emerald
+      sweepGradient.addColorStop(1, "rgba(16, 185, 129, 0.0)");
 
       ctx.beginPath();
       ctx.moveTo(radarCenterX, radarCenterY);

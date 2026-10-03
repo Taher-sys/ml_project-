@@ -8,8 +8,9 @@
     --color-panel: #181D24;
     --color-divider: #2A3241;
     --color-graphite: #212631;
-    --color-volt: #D4F63C;
-    --color-volt-hover: #CEF238;
+    --color-emerald: #10B981;
+    --color-emerald-hover: #059669;
+    --color-teal: #14B8A6;
     --color-crimson: #FF3B30;
     --color-bone: #EDEDED;
     --color-slate: #7E8B9B;
@@ -52,11 +53,11 @@
   border: 1px solid #212631;
 }
 
-/* Sharp focus ring in Industrial High-Vis Volt */
-.focus-volt:focus-visible {
+/* Sharp focus ring in Industrial Muted Emerald */
+.focus-emerald:focus-visible {
   outline: none;
-  border-color: #D4F63C;
-  box-shadow: 0 0 0 1px #D4F63C;
+  border-color: #10B981;
+  box-shadow: 0 0 0 1px #10B981;
 }
 
 /* Precision Scrollbars */

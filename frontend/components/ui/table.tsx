@@ -48,7 +48,7 @@ function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
     <tr
       data-slot="table-row"
       className={cn(
-        "transition-colors hover:bg-[#181D24] data-[state=selected]:bg-[#D4F63C]/10",
+        "transition-colors hover:bg-[#181D24] data-[state=selected]:bg-[#10B981]/10",
         className
       )}
       {...props}

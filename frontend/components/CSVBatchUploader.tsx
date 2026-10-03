@@ -307,7 +307,7 @@ export const CSVBatchUploader: React.FC<CSVBatchUploaderProps> = ({
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
             <div className="space-y-1">
               <CardTitle className="text-lg md:text-xl font-bold text-[#EDEDED] flex items-center gap-2.5 font-mono">
-                <div className="p-2 rounded-lg bg-[#13171D] border border-[#2A3241] text-[#D4F63C]">
+                <div className="p-2 rounded-lg bg-[#13171D] border border-[#2A3241] text-[#10B981]">
                   <FileSpreadsheet className="w-5 h-5" />
                 </div>
                 Fleet CSV Telemetry Ingestion Hub
@@ -322,10 +322,10 @@ export const CSVBatchUploader: React.FC<CSVBatchUploaderProps> = ({
               <a
                 href="/batch_fleet_telemetry.csv"
                 download="batch_fleet_telemetry.csv"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold bg-[#13171D] border border-[#2A3241] hover:border-[#D4F63C] hover:text-[#D4F63C] text-[#EDEDED] transition-colors shadow-sm"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold bg-[#13171D] border border-[#2A3241] hover:border-[#10B981] hover:text-[#10B981] text-[#EDEDED] transition-colors shadow-sm"
                 title="Download complete 24-machine telemetry dataset"
               >
-                <Download className="w-3.5 h-3.5 text-[#D4F63C]" />
+                <Download className="w-3.5 h-3.5 text-[#10B981]" />
                 Download Batch CSV
               </a>
 
@@ -333,9 +333,9 @@ export const CSVBatchUploader: React.FC<CSVBatchUploaderProps> = ({
                 variant="outline"
                 size="sm"
                 onClick={() => parseAndEvaluateCSV(SAMPLE_FLEET_DATASET_CSV, "batch_fleet_telemetry.csv")}
-                className="text-xs h-8 gap-1.5 font-mono border-[#2A3241] bg-[#13171D] text-[#D4F63C] hover:bg-[#181D24]"
+                className="text-xs h-8 gap-1.5 font-mono border-[#2A3241] bg-[#13171D] text-[#10B981] hover:bg-[#181D24]"
               >
-                <Database className="w-3.5 h-3.5 text-[#D4F63C]" />
+                <Database className="w-3.5 h-3.5 text-[#10B981]" />
                 Load Full Fleet (24 Units)
               </Button>
 
@@ -364,8 +364,8 @@ export const CSVBatchUploader: React.FC<CSVBatchUploaderProps> = ({
             onClick={() => fileInputRef.current?.click()}
             className={`border border-dashed rounded-xl p-6 text-center transition-colors cursor-pointer select-none ${
               isDragging
-                ? "border-[#D4F63C] bg-[#13171D]"
-                : "border-[#2A3241] bg-[#13171D] hover:border-[#D4F63C]"
+                ? "border-[#10B981] bg-[#13171D]"
+                : "border-[#2A3241] bg-[#13171D] hover:border-[#10B981]"
             }`}
           >
             <input
@@ -376,14 +376,14 @@ export const CSVBatchUploader: React.FC<CSVBatchUploaderProps> = ({
               className="hidden"
             />
             <div className="flex flex-col items-center justify-center gap-2">
-              <div className="p-3 rounded-lg bg-[#181D24] border border-[#2A3241] text-[#D4F63C]">
+              <div className="p-3 rounded-lg bg-[#181D24] border border-[#2A3241] text-[#10B981]">
                 <Upload className="w-5 h-5" />
               </div>
               <div className="space-y-1">
                 <p className="text-sm font-bold text-[#EDEDED] font-mono">
                   {fileName ? (
-                    <span className="text-[#D4F63C] flex items-center justify-center gap-1.5">
-                      <CheckCircle2 className="w-4 h-4 text-[#D4F63C]" /> Loaded: {fileName}
+                    <span className="text-[#10B981] flex items-center justify-center gap-1.5">
+                      <CheckCircle2 className="w-4 h-4 text-[#10B981]" /> Loaded: {fileName}
                     </span>
                   ) : (
                     "Drop Telemetry CSV here or click to browse"
@@ -419,7 +419,7 @@ export const CSVBatchUploader: React.FC<CSVBatchUploaderProps> = ({
             <div className="text-xs text-[#7E8B9B] font-mono font-medium">Ingested Fleet Size</div>
             <div className="text-2xl font-bold font-mono text-[#EDEDED] mt-1">{totalCount} Units</div>
             <div className="text-[11px] text-[#7E8B9B] mt-1 font-mono flex items-center gap-1">
-              <Database className="w-3 h-3 text-[#D4F63C]" /> AI4I 2020 Batch Stream
+              <Database className="w-3 h-3 text-[#10B981]" /> AI4I 2020 Batch Stream
             </div>
           </Card>
 
@@ -435,7 +435,7 @@ export const CSVBatchUploader: React.FC<CSVBatchUploaderProps> = ({
             </GlowBorderCard>
           ) : (
             <Card className="border-[#2A3241] bg-[#181D24] p-4">
-              <div className="text-xs text-[#D4F63C] font-mono font-medium flex items-center gap-1.5">
+              <div className="text-xs text-[#10B981] font-mono font-medium flex items-center gap-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5" /> Critical Hazards
               </div>
               <div className="text-2xl font-bold font-mono text-[#EDEDED] mt-1">0 Units</div>
@@ -456,18 +456,18 @@ export const CSVBatchUploader: React.FC<CSVBatchUploaderProps> = ({
           ) : (
             <Card className="border-[#2A3241] bg-[#181D24] p-4">
               <div className="text-xs text-[#7E8B9B] font-mono font-medium flex items-center gap-1.5">
-                <Activity className="w-3.5 h-3.5 text-[#D4F63C]" /> High Uncertainty
+                <Activity className="w-3.5 h-3.5 text-[#10B981]" /> High Uncertainty
               </div>
               <div className="text-2xl font-bold font-mono text-[#EDEDED] mt-1">0 Units</div>
               <div className="text-[11px] text-[#7E8B9B] mt-1 font-mono">All predictions within confidence bound</div>
             </Card>
           )}
 
-          <GlowBorderCard colorPreset="volt" className="p-4 border-[#D4F63C] bg-[#181D24]">
-            <div className="text-xs text-[#D4F63C] font-bold flex items-center gap-1.5 font-mono">
-              <CheckCircle2 className="w-3.5 h-3.5 text-[#D4F63C]" /> Fleet Health Index
+          <GlowBorderCard colorPreset="volt" className="p-4 border-[#10B981] bg-[#181D24]">
+            <div className="text-xs text-[#10B981] font-bold flex items-center gap-1.5 font-mono">
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#10B981]" /> Fleet Health Index
             </div>
-            <div className="text-2xl font-black font-mono text-[#D4F63C] mt-1">
+            <div className="text-2xl font-black font-mono text-[#10B981] mt-1">
               {fleetHealthScore.toFixed(0)}%
             </div>
             <div className="text-[11px] text-[#EDEDED] mt-1 font-mono">
@@ -487,14 +487,14 @@ export const CSVBatchUploader: React.FC<CSVBatchUploaderProps> = ({
                 { id: "all", label: `All Machines (${totalCount})` },
                 { id: "anomalous", label: `Critical Hazards (${criticalCount})`, color: "text-[#FF3B30]" },
                 { id: "uncertain", label: `High Uncertainty (${uncertainCount})`, color: "text-[#F5A623]" },
-                { id: "nominal", label: `Nominal Units (${nominalCount})`, color: "text-[#D4F63C]" },
+                { id: "nominal", label: `Nominal Units (${nominalCount})`, color: "text-[#10B981]" },
               ].map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => setFilterTab(tab.id as typeof filterTab)}
                   className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-colors cursor-pointer whitespace-nowrap ${
                     filterTab === tab.id
-                      ? "bg-[#13171D] text-[#D4F63C] border border-[#2A3241]"
+                      ? "bg-[#13171D] text-[#10B981] border border-[#2A3241]"
                       : "text-[#7E8B9B] hover:text-[#EDEDED] hover:bg-[#13171D]/60"
                   }`}
                 >
@@ -512,12 +512,12 @@ export const CSVBatchUploader: React.FC<CSVBatchUploaderProps> = ({
                   placeholder="Filter Machine ID or Mode..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="bg-[#13171D] border border-[#2A3241] rounded-lg pl-8 pr-3 py-1.5 text-xs text-[#EDEDED] placeholder:text-[#7E8B9B] focus:outline-none focus:border-[#D4F63C] font-mono transition-colors w-48 md:w-56"
+                  className="bg-[#13171D] border border-[#2A3241] rounded-lg pl-8 pr-3 py-1.5 text-xs text-[#EDEDED] placeholder:text-[#7E8B9B] focus:outline-none focus:border-[#10B981] font-mono transition-colors w-48 md:w-56"
                 />
               </div>
 
               {isEvaluating && (
-                <div className="flex items-center gap-1.5 text-xs text-[#D4F63C] font-mono">
+                <div className="flex items-center gap-1.5 text-xs text-[#10B981] font-mono">
                   <RefreshCw className="w-3.5 h-3.5 animate-spin" /> Evaluating...
                 </div>
               )}
@@ -575,13 +575,13 @@ export const CSVBatchUploader: React.FC<CSVBatchUploaderProps> = ({
                         </td>
                         <td className="py-2.5 px-3 text-right text-[#EDEDED]">{row.air_temperature.toFixed(1)}</td>
                         <td className="py-2.5 px-3 text-right text-[#EDEDED]">{row.process_temperature.toFixed(1)}</td>
-                        <td className="py-2.5 px-3 text-right text-[#D4F63C]">{row.rotational_speed.toFixed(0)}</td>
+                        <td className="py-2.5 px-3 text-right text-[#10B981]">{row.rotational_speed.toFixed(0)}</td>
                         <td className="py-2.5 px-3 text-right text-[#EDEDED]">{row.torque.toFixed(1)}</td>
                         <td className="py-2.5 px-3 text-right text-[#EDEDED]">{row.tool_wear.toFixed(0)}</td>
                         <td className="py-2.5 px-3 text-center">
                           <span
                             className={`font-bold ${
-                              prob > 0.65 ? "text-[#FF3B30]" : prob > 0.35 ? "text-[#F5A623]" : "text-[#D4F63C]"
+                              prob > 0.65 ? "text-[#FF3B30]" : prob > 0.35 ? "text-[#F5A623]" : "text-[#10B981]"
                             }`}
                           >
                             {(prob * 100).toFixed(1)}%
@@ -626,7 +626,7 @@ export const CSVBatchUploader: React.FC<CSVBatchUploaderProps> = ({
                                     type: row.type,
                                   })
                                 }
-                                className="p-1 rounded bg-[#13171D] hover:bg-[#181D24] text-[#7E8B9B] hover:text-[#D4F63C] border border-[#2A3241] transition-colors"
+                                className="p-1 rounded bg-[#13171D] hover:bg-[#181D24] text-[#7E8B9B] hover:text-[#10B981] border border-[#2A3241] transition-colors"
                               >
                                 <Play className="w-3 h-3" />
                               </button>

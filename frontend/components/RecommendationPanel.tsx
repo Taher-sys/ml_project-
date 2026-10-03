@@ -28,8 +28,8 @@ export const RecommendationPanel: React.FC<RecommendationPanelProps> = ({
 
   let theme = {
     bg: "border-[#2A3241] bg-[#181D24] text-[#EDEDED]",
-    badge: "border-[#D4F63C]/40 bg-[#13171D] text-[#D4F63C]",
-    icon: <CheckCircle className="w-5 h-5 text-[#D4F63C]" />,
+    badge: "border-[#10B981]/40 bg-[#13171D] text-[#10B981]",
+    icon: <CheckCircle className="w-5 h-5 text-[#10B981]" />,
   };
 
   if (isImmediate) {

@@ -130,7 +130,7 @@ export default function DashboardPage() {
       <header className="py-5 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#212631]">
         <div className="flex items-center gap-3.5">
           <div className="p-2.5 bg-[#181D24] border border-[#2A3241] rounded-xl shadow-sm">
-            <Cpu className="w-5 h-5 text-[#D4F63C]" />
+            <Cpu className="w-5 h-5 text-[#10B981]" />
           </div>
           <div>
             <div className="flex items-center gap-2">
@@ -152,10 +152,10 @@ export default function DashboardPage() {
           <a
             href="/batch_fleet_telemetry.csv"
             download="batch_fleet_telemetry.csv"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#181D24] border border-[#2A3241] hover:border-[#D4F63C] hover:text-[#D4F63C] text-xs text-[#EDEDED] font-mono transition-colors shadow-sm"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#181D24] border border-[#2A3241] hover:border-[#10B981] hover:text-[#10B981] text-xs text-[#EDEDED] font-mono transition-colors shadow-sm"
             title="Download ready-to-upload telemetry dataset"
           >
-            <Download className="w-3.5 h-3.5 text-[#D4F63C]" />
+            <Download className="w-3.5 h-3.5 text-[#10B981]" />
             <span>Sample CSV</span>
           </a>
 
@@ -170,8 +170,8 @@ export default function DashboardPage() {
           {/* Live Service Indicator */}
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#181D24] border border-[#212631] text-xs font-mono">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D4F63C] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#D4F63C]"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#10B981]"></span>
             </span>
             <span className="text-[#EDEDED]">FastAPI Online</span>
           </div>
@@ -180,7 +180,7 @@ export default function DashboardPage() {
             variant="outline"
             size="sm"
             onClick={() => setShowModelModal(true)}
-            className="text-xs gap-1.5 border-[#2A3241] bg-[#181D24] text-[#EDEDED] hover:border-[#D4F63C] hover:text-[#D4F63C] font-mono h-8"
+            className="text-xs gap-1.5 border-[#2A3241] bg-[#181D24] text-[#EDEDED] hover:border-[#10B981] hover:text-[#10B981] font-mono h-8"
           >
             <Info className="w-3.5 h-3.5" /> Specs
           </Button>
@@ -212,7 +212,7 @@ export default function DashboardPage() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-1.5 rounded-xl bg-[#13171D] border border-[#212631]">
           <TabsList className="bg-transparent border-0 p-0 mb-0">
             <TabsTrigger value="batch_csv" className="gap-2">
-              <FileSpreadsheet className="w-4 h-4 text-[#D4F63C]" />
+              <FileSpreadsheet className="w-4 h-4 text-[#10B981]" />
               Fleet CSV Telemetry Ingestion Hub
               <span className="ml-1 px-1.5 py-0.5 rounded bg-[#0D0F12] text-[10px] text-[#7E8B9B] border border-[#212631]">
                 AI4I Batch
@@ -220,7 +220,7 @@ export default function DashboardPage() {
             </TabsTrigger>
 
             <TabsTrigger value="single_sim" className="gap-2">
-              <Sliders className="w-4 h-4 text-[#D4F63C]" />
+              <Sliders className="w-4 h-4 text-[#10B981]" />
               Single-Unit Diagnostic Simulator
             </TabsTrigger>
           </TabsList>
@@ -228,7 +228,7 @@ export default function DashboardPage() {
           <div className="hidden lg:flex items-center gap-2 text-xs text-[#7E8B9B] font-mono pr-4">
             <span className="text-[#EDEDED]">AI4I 2020 Protocol</span>
             <span>•</span>
-            <span className="text-[#D4F63C]">50 MC Forward Passes</span>
+            <span className="text-[#10B981]">50 MC Forward Passes</span>
           </div>
         </div>
 
@@ -335,7 +335,7 @@ export default function DashboardPage() {
           >
             <div className="flex items-center justify-between pb-3 border-b border-[#2A3241] mb-4">
               <h3 className="text-base font-bold text-[#EDEDED] flex items-center gap-2 font-mono">
-                <Server className="w-5 h-5 text-[#D4F63C]" /> BNN Model Architecture & Benchmark Metrics
+                <Server className="w-5 h-5 text-[#10B981]" /> BNN Model Architecture & Benchmark Metrics
               </h3>
               <button
                 onClick={() => setShowModelModal(false)}
@@ -348,7 +348,7 @@ export default function DashboardPage() {
             <div className="space-y-4 text-xs text-[#EDEDED] font-mono">
               <div>
                 <p className="text-[#7E8B9B] font-sans font-medium">Neural Architecture:</p>
-                <p className="text-[#D4F63C] mt-0.5">
+                <p className="text-[#10B981] mt-0.5">
                   Input(8) → Linear(64) → ReLU → MCDropout(0.3) → Linear(32) → ReLU → MCDropout(0.3) → Linear(1) → Sigmoid
                 </p>
               </div>
@@ -364,7 +364,7 @@ export default function DashboardPage() {
                 <p className="text-[#7E8B9B] font-sans font-medium mb-1.5">Model Benchmarks on AI4I 2020 Test Set:</p>
                 <div className="grid grid-cols-2 gap-3 bg-[#181D24] p-3 rounded-lg border border-[#2A3241]">
                   <div>
-                    <strong className="text-[#D4F63C] block mb-1">Bayesian BNN (MC Dropout)</strong>
+                    <strong className="text-[#10B981] block mb-1">Bayesian BNN (MC Dropout)</strong>
                     <p>Accuracy: {(modelInfo?.metrics?.bayesian_bnn?.accuracy ? modelInfo.metrics.bayesian_bnn.accuracy * 100 : 97.2).toFixed(1)}%</p>
                     <p>ROC-AUC: {(modelInfo?.metrics?.bayesian_bnn?.roc_auc ? modelInfo.metrics.bayesian_bnn.roc_auc : 0.942).toFixed(3)}</p>
                     <p>Calibration ECE: {(modelInfo?.metrics?.bayesian_bnn?.calibration_ece ? modelInfo.metrics.bayesian_bnn.calibration_ece : 0.018).toFixed(3)}</p>

@@ -18,10 +18,10 @@ export function Badge({
     secondary: "border-[#212631] bg-[#13171D] text-[#7E8B9B]",
     destructive: "border-[#FF3B30]/50 bg-[#FF3B30]/10 text-[#FF3B30]",
     warning: "border-[#F5A623]/50 bg-[#F5A623]/10 text-[#F5A623]",
-    success: "border-[#D4F63C]/40 bg-[#D4F63C]/10 text-[#D4F63C]",
+    success: "border-[#10B981]/40 bg-[#10B981]/10 text-[#10B981]",
     outline: "border-[#2A3241] text-[#7E8B9B] bg-transparent",
-    cyan: "border-[#D4F63C]/40 bg-[#D4F63C]/10 text-[#D4F63C]",
-    volt: "border-[#D4F63C]/40 bg-[#D4F63C]/10 text-[#D4F63C]",
+    cyan: "border-[#14B8A6]/40 bg-[#14B8A6]/10 text-[#14B8A6]",
+    volt: "border-[#10B981]/40 bg-[#10B981]/10 text-[#10B981]",
   }[variant];
 
   const sizeStyles = {

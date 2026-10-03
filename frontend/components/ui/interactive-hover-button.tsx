@@ -17,13 +17,13 @@ export function InteractiveHoverButton({
   return (
     <button
       className={cn(
-        "group relative w-auto cursor-pointer overflow-hidden rounded border border-[#2A3241] bg-[#181D24] px-5 py-2.5 text-center text-xs font-bold text-[#EDEDED] transition-all duration-200 hover:border-[#D4F63C] hover:text-[#D4F63C] active:scale-[0.98]",
+        "group relative w-auto cursor-pointer overflow-hidden rounded border border-[#2A3241] bg-[#181D24] px-5 py-2.5 text-center text-xs font-bold text-[#EDEDED] transition-all duration-200 hover:border-[#10B981] hover:text-[#10B981] active:scale-[0.98]",
         className
       )}
       {...props}
     >
       <div className="flex items-center gap-2">
-        <div className="h-2 w-2 rounded-full bg-[#D4F63C] transition-all duration-300 group-hover:scale-[35] group-hover:bg-[#D4F63C]"></div>
+        <div className="h-2 w-2 rounded-full bg-[#10B981] transition-all duration-300 group-hover:scale-[35] group-hover:bg-[#10B981]"></div>
         <span className="inline-block transition-all duration-300 group-hover:translate-x-12 group-hover:opacity-0">
           {children}
         </span>

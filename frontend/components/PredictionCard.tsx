@@ -14,7 +14,7 @@ export const PredictionCard: React.FC<PredictionCardProps> = ({ prediction, isLo
   if (isLoading) {
     return (
       <div className="rounded-xl p-6 border border-[#2A3241] bg-[#181D24] shadow-sm flex flex-col justify-center items-center h-48">
-        <Activity className="w-8 h-8 text-[#D4F63C] animate-spin mb-3" />
+        <Activity className="w-8 h-8 text-[#10B981] animate-spin mb-3" />
         <p className="text-xs text-[#7E8B9B] font-mono">Running 50 Monte Carlo Dropout Forward Passes...</p>
       </div>
     );
@@ -54,7 +54,7 @@ export const PredictionCard: React.FC<PredictionCardProps> = ({ prediction, isLo
           className={`flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-xs font-bold font-mono uppercase tracking-wider border ${
             isFailure
               ? "bg-[#FF3B30]/10 text-[#FF3B30] border-[#FF3B30]/50"
-              : "bg-[#13171D] text-[#D4F63C] border-[#2A3241]"
+              : "bg-[#13171D] text-[#10B981] border-[#10B981]/40"
           }`}
         >
           {isFailure ? (
@@ -63,7 +63,7 @@ export const PredictionCard: React.FC<PredictionCardProps> = ({ prediction, isLo
             </>
           ) : (
             <>
-              <CheckCircle2 className="w-3.5 h-3.5 text-[#D4F63C]" /> Nominal Operation
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#10B981]" /> Nominal Operation
             </>
           )}
         </span>
@@ -91,7 +91,7 @@ export const PredictionCard: React.FC<PredictionCardProps> = ({ prediction, isLo
         </span>
         <span>
           Confidence:{" "}
-          <strong className="text-[#D4F63C]">{(prediction.confidence_score * 100).toFixed(1)}%</strong>
+          <strong className="text-[#10B981]">{(prediction.confidence_score * 100).toFixed(1)}%</strong>
         </span>
       </div>
     </motion.div>

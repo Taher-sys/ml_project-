@@ -27,10 +27,10 @@ export const GlowBorderCard = React.forwardRef<HTMLDivElement, GlowBorderCardPro
     const presetBorder = {
       hazard: "border-[#FF3B30] bg-[#181D24]",
       sunset: "border-[#F5A623] bg-[#181D24]",
-      nature: "border-[#D4F63C] bg-[#181D24]",
-      volt: "border-[#D4F63C] bg-[#181D24]",
-      ocean: "border-[#2A3241] bg-[#181D24]",
-      aurora: "border-[#D4F63C] bg-[#181D24]",
+      nature: "border-[#10B981] bg-[#181D24]",
+      volt: "border-[#10B981] bg-[#181D24]",
+      ocean: "border-[#14B8A6] bg-[#181D24]",
+      aurora: "border-[#10B981] bg-[#181D24]",
       custom: "border-[#2A3241] bg-[#181D24]",
     }[colorPreset] || "border-[#2A3241] bg-[#181D24]";
 

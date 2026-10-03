@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className="bg-[#0D0F12] text-[#EDEDED] min-h-screen antialiased selection:bg-[#D4F63C] selection:text-[#0D0F12] relative overflow-x-hidden">
+      <body className="bg-[#0D0F12] text-[#EDEDED] min-h-screen antialiased selection:bg-[#10B981] selection:text-[#0D1117] relative overflow-x-hidden">
         {/* Contained, Grounded Technical Backdrop with Zero Pointer Events */}
         <TechnicalBackground />
 

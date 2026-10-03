@@ -62,9 +62,9 @@ export const SafetyMeasuresPanel: React.FC<SafetyMeasuresPanelProps> = ({
           <motion.li
             key={idx}
             variants={itemVariants}
-            className="flex items-start gap-2.5 p-3 rounded bg-[#13171D] border border-[#212631] hover:border-[#D4F63C]/50 transition-colors text-xs text-[#EDEDED] font-mono"
+            className="flex items-start gap-2.5 p-3 rounded bg-[#13171D] border border-[#212631] hover:border-[#10B981]/50 transition-colors text-xs text-[#EDEDED] font-mono"
           >
-            <CheckSquare className="w-4 h-4 text-[#D4F63C] shrink-0 mt-0.5" />
+            <CheckSquare className="w-4 h-4 text-[#10B981] shrink-0 mt-0.5" />
             <span className="leading-relaxed">{measure}</span>
           </motion.li>
         ))}
