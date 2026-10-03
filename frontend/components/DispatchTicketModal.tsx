@@ -46,7 +46,6 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { BorderBeam } from "@/components/ui/border-beam";
 import { dispatchMaintenanceTicket } from "@/lib/api";
 
 interface DispatchTicketModalProps {
@@ -214,19 +213,19 @@ export const DispatchTicketModal: React.FC<DispatchTicketModalProps> = ({
     switch (urgency) {
       case "CRITICAL":
         return (
-          <Badge variant="destructive" size="lg" className="animate-pulse">
+          <Badge variant="destructive" size="lg" className="rounded">
             <ShieldAlert className="w-3.5 h-3.5" /> CRITICAL DISPATCH
           </Badge>
         );
       case "ELEVATED":
         return (
-          <Badge variant="warning" size="lg">
+          <Badge variant="warning" size="lg" className="rounded">
             <AlertTriangle className="w-3.5 h-3.5" /> ELEVATED RISK
           </Badge>
         );
       default:
         return (
-          <Badge variant="cyan" size="lg">
+          <Badge variant="volt" size="lg" className="rounded">
             <Activity className="w-3.5 h-3.5" /> REVIEW REQUIRED
           </Badge>
         );
@@ -236,58 +235,58 @@ export const DispatchTicketModal: React.FC<DispatchTicketModalProps> = ({
   const getFailureIcon = (code: FailureModeCode) => {
     switch (code) {
       case "TWF":
-        return <Wrench className="w-5 h-5 text-rose-400" />;
+        return <Wrench className="w-5 h-5 text-[#FF3B30]" />;
       case "HDF":
-        return <Flame className="w-5 h-5 text-amber-400" />;
+        return <Flame className="w-5 h-5 text-[#FF3B30]" />;
       case "PWF":
-        return <Zap className="w-5 h-5 text-yellow-400" />;
+        return <Zap className="w-5 h-5 text-[#D4F63C]" />;
       case "OSF":
-        return <AlertTriangle className="w-5 h-5 text-red-400" />;
+        return <AlertTriangle className="w-5 h-5 text-[#FF3B30]" />;
       default:
-        return <Activity className="w-5 h-5 text-cyan-400" />;
+        return <Activity className="w-5 h-5 text-[#D4F63C]" />;
     }
   };
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 md:p-6 bg-black/85 backdrop-blur-md overflow-y-auto">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 md:p-6 bg-black/85 overflow-y-auto">
         <motion.div
           initial={{ opacity: 0, scale: 0.96, y: 12 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: 12 }}
           transition={{ duration: 0.2 }}
-          className="relative w-full max-w-5xl rounded-2xl border border-zinc-800 bg-zinc-950 text-zinc-100 shadow-2xl overflow-hidden my-auto max-h-[92vh] flex flex-col"
+          className="relative w-full max-w-5xl rounded-lg border border-[#2A3241] bg-[#181D24] text-[#EDEDED] shadow-2xl overflow-hidden my-auto max-h-[92vh] flex flex-col"
         >
           {ticket.urgency === "CRITICAL" && (
-            <BorderBeam size={320} duration={10} colorFrom="#ef4444" colorTo="#f97316" />
+            <div className="absolute top-0 left-0 right-0 h-1 bg-[#FF3B30] z-30" />
           )}
 
           {/* Modal Header */}
-          <div className="flex items-center justify-between p-5 border-b border-zinc-800/80 bg-zinc-900/60 sticky top-0 z-20 backdrop-blur-md">
+          <div className="flex items-center justify-between p-5 border-b border-[#2A3241] bg-[#13171D] sticky top-0 z-20">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-zinc-800/80 border border-zinc-700/60">
+              <div className="p-2.5 rounded bg-[#181D24] border border-[#2A3241]">
                 {getFailureIcon(ticket.failureMode.code)}
               </div>
               <div>
                 <div className="flex items-center gap-2.5">
-                  <h2 className="text-lg md:text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                  <h2 className="text-lg md:text-xl font-bold tracking-tight text-[#EDEDED] flex items-center gap-2">
                     Maintenance Dispatch Ticket
                   </h2>
                   <span
                     onClick={handleCopyTicketId}
-                    className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-zinc-800 hover:bg-zinc-700 text-cyan-400 text-xs font-mono font-bold cursor-pointer transition-colors"
+                    className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#181D24] hover:bg-[#212631] text-[#D4F63C] text-xs font-mono font-bold cursor-pointer border border-[#2A3241] transition-colors"
                     title="Copy Ticket ID"
                   >
                     {ticket.ticketId}
-                    {copiedId ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+                    {copiedId ? <Check className="w-3 h-3 text-[#D4F63C]" /> : <Copy className="w-3 h-3" />}
                   </span>
                 </div>
-                <p className="text-xs text-zinc-400 flex items-center gap-2 mt-0.5">
-                  <span>Machine ID: <strong className="text-zinc-200 font-mono">{ticket.machineId}</strong></span>
+                <p className="text-xs text-[#7E8B9B] flex items-center gap-2 mt-0.5">
+                  <span>Machine ID: <strong className="text-[#EDEDED] font-mono">{ticket.machineId}</strong></span>
                   <span>•</span>
                   <span>Generated: {new Date(ticket.timestamp).toLocaleTimeString()}</span>
                   <span>•</span>
-                  <span className="text-zinc-300 font-medium">{ticket.status}</span>
+                  <span className="text-[#EDEDED] font-medium">{ticket.status}</span>
                 </p>
               </div>
             </div>
@@ -296,7 +295,7 @@ export const DispatchTicketModal: React.FC<DispatchTicketModalProps> = ({
               {getUrgencyBadge(ticket.urgency)}
               <button
                 onClick={onClose}
-                className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors cursor-pointer"
+                className="p-1.5 rounded text-[#7E8B9B] hover:text-[#EDEDED] hover:bg-[#181D24] border border-[#2A3241] transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -304,7 +303,7 @@ export const DispatchTicketModal: React.FC<DispatchTicketModalProps> = ({
           </div>
 
           {/* Tab Navigation */}
-          <div className="flex items-center gap-2 px-5 pt-3 pb-2 border-b border-zinc-800 bg-zinc-900/30">
+          <div className="flex items-center gap-2 px-5 pt-3 pb-2 border-b border-[#2A3241] bg-[#13171D]">
             {[
               { id: "overview", label: "Diagnostic Overview", icon: Gauge },
               { id: "shap", label: "SHAP Root Cause Analysis", icon: Activity },
@@ -317,13 +316,13 @@ export const DispatchTicketModal: React.FC<DispatchTicketModalProps> = ({
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as typeof activeTab)}
-                  className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium transition-all cursor-pointer ${
+                  className={`flex items-center gap-2 px-3.5 py-2 rounded text-xs font-medium transition-all cursor-pointer ${
                     isActive
-                      ? "bg-zinc-800 text-cyan-400 font-bold border border-zinc-700/80 shadow-sm"
-                      : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900"
+                      ? "bg-[#181D24] text-[#D4F63C] font-bold border border-[#2A3241]"
+                      : "text-[#7E8B9B] hover:text-[#EDEDED] hover:bg-[#181D24]"
                   }`}
                 >
-                  <Icon className={`w-3.5 h-3.5 ${isActive ? "text-cyan-400" : "text-zinc-500"}`} />
+                  <Icon className={`w-3.5 h-3.5 ${isActive ? "text-[#D4F63C]" : "text-[#7E8B9B]"}`} />
                   {tab.label}
                 </button>
               );
@@ -336,45 +335,43 @@ export const DispatchTicketModal: React.FC<DispatchTicketModalProps> = ({
             {activeTab === "overview" && (
               <div className="space-y-6">
                 {/* Failure Diagnosis Banner */}
-                <div className={`p-4 rounded-xl border ${
+                <div className={`p-4 rounded border ${
                   ticket.failureMode.code === "OSF" || ticket.failureMode.code === "TWF"
-                    ? "bg-red-950/20 border-red-500/40"
-                    : ticket.failureMode.code === "HDF" || ticket.failureMode.code === "PWF"
-                    ? "bg-amber-950/20 border-amber-500/40"
-                    : "bg-cyan-950/20 border-cyan-500/40"
+                    ? "bg-[#13171D] border-[#FF3B30]/50"
+                    : "bg-[#13171D] border-[#2A3241]"
                 }`}>
                   <div className="flex items-start justify-between gap-4">
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
-                        <span className="px-2 py-0.5 rounded text-xs font-bold font-mono bg-zinc-900 border border-zinc-700 text-cyan-300">
+                        <span className="px-2 py-0.5 rounded text-xs font-bold font-mono bg-[#181D24] border border-[#2A3241] text-[#D4F63C]">
                           {ticket.failureMode.code}
                         </span>
-                        <h3 className="font-bold text-base text-zinc-100">
+                        <h3 className="font-bold text-base text-[#EDEDED]">
                           {ticket.failureMode.name}
                         </h3>
                       </div>
-                      <p className="text-xs text-zinc-300 leading-relaxed max-w-2xl">
+                      <p className="text-xs text-[#7E8B9B] leading-relaxed max-w-2xl">
                         {ticket.failureMode.description}
                       </p>
                     </div>
 
                     <div className="text-right shrink-0">
-                      <div className="text-xs text-zinc-400">Decision Directive</div>
-                      <div className="text-sm font-bold text-cyan-300 mt-0.5">
+                      <div className="text-xs text-[#7E8B9B]">Decision Directive</div>
+                      <div className="text-sm font-bold text-[#D4F63C] mt-0.5">
                         {ticket.prediction.recommendation}
                       </div>
                     </div>
                   </div>
 
                   {ticket.failureMode.indicators.length > 0 && (
-                    <div className="mt-3 pt-3 border-t border-zinc-800/80">
-                      <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider block mb-1.5">
+                    <div className="mt-3 pt-3 border-t border-[#2A3241]">
+                      <span className="text-[11px] font-semibold text-[#7E8B9B] uppercase tracking-wider block mb-1.5">
                         Triggered Sensor Threshold Indicators:
                       </span>
                       <ul className="space-y-1">
                         {ticket.failureMode.indicators.map((ind, i) => (
-                          <li key={i} className="text-xs text-zinc-300 flex items-center gap-2 font-mono">
-                            <span className="w-1.5 h-1.5 rounded-full bg-red-400 shrink-0" />
+                          <li key={i} className="text-xs text-[#EDEDED] flex items-center gap-2 font-mono">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#FF3B30] shrink-0" />
                             {ind}
                           </li>
                         ))}
@@ -385,14 +382,14 @@ export const DispatchTicketModal: React.FC<DispatchTicketModalProps> = ({
 
                 {/* Bayesian Probability & Uncertainty Metrics Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <Card className="border-zinc-800 bg-zinc-900/60">
+                  <Card className="border-[#2A3241] bg-[#13171D] rounded">
                     <CardHeader className="p-4 pb-2">
-                      <CardDescription className="text-xs font-medium text-zinc-400">
+                      <CardDescription className="text-xs font-medium text-[#7E8B9B]">
                         Predictive Failure Likelihood (μ)
                       </CardDescription>
-                      <CardTitle className="text-2xl font-bold font-mono text-red-400 flex items-baseline gap-2">
+                      <CardTitle className="text-2xl font-bold font-mono text-[#FF3B30] flex items-baseline gap-2">
                         {(ticket.prediction.failure_probability * 100).toFixed(1)}%
-                        <span className="text-xs font-normal text-zinc-400">mean probability</span>
+                        <span className="text-xs font-normal text-[#7E8B9B]">mean probability</span>
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="p-4 pt-1">
@@ -400,60 +397,60 @@ export const DispatchTicketModal: React.FC<DispatchTicketModalProps> = ({
                         value={ticket.prediction.failure_probability * 100}
                         indicatorClassName={
                           ticket.prediction.failure_probability > 0.65
-                            ? "bg-red-500"
+                            ? "bg-[#FF3B30]"
                             : ticket.prediction.failure_probability > 0.35
-                            ? "bg-amber-500"
-                            : "bg-emerald-500"
+                            ? "bg-[#F5A623]"
+                            : "bg-[#D4F63C]"
                         }
                       />
-                      <div className="flex justify-between text-[11px] text-zinc-500 font-mono mt-1.5">
-                        <span>0% Safe</span>
+                      <div className="flex justify-between text-[11px] text-[#7E8B9B] font-mono mt-1.5">
+                        <span>0% Nominal</span>
                         <span>Threshold: 65%</span>
-                        <span>100% Failure</span>
+                        <span>100% Hazard</span>
                       </div>
                     </CardContent>
                   </Card>
 
-                  <Card className="border-zinc-800 bg-zinc-900/60">
+                  <Card className="border-[#2A3241] bg-[#13171D] rounded">
                     <CardHeader className="p-4 pb-2">
-                      <CardDescription className="text-xs font-medium text-zinc-400">
+                      <CardDescription className="text-xs font-medium text-[#7E8B9B]">
                         Epistemic Uncertainty (σ across 50 MC passes)
                       </CardDescription>
-                      <CardTitle className="text-2xl font-bold font-mono text-amber-400 flex items-baseline gap-2">
+                      <CardTitle className="text-2xl font-bold font-mono text-[#D4F63C] flex items-baseline gap-2">
                         ±{ticket.prediction.uncertainty_std.toFixed(4)}
-                        <span className="text-xs font-normal text-zinc-400">std deviation</span>
+                        <span className="text-xs font-normal text-[#7E8B9B]">std deviation</span>
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="p-4 pt-1">
                       <div className="flex items-center gap-2">
-                        <span className="text-xs text-zinc-300 font-mono">
+                        <span className="text-xs text-[#EDEDED] font-mono">
                           {ticket.prediction.uncertainty_std > 0.08
                             ? "Elevated epistemic ambiguity (model divergence)"
                             : "High predictive consensus (low model variance)"}
                         </span>
                       </div>
-                      <div className="mt-2 text-[11px] text-zinc-500">
+                      <div className="mt-2 text-[11px] text-[#7E8B9B]">
                         Evaluated across 50 stochastic PyTorch Monte Carlo Dropout inferences.
                       </div>
                     </CardContent>
                   </Card>
 
-                  <Card className="border-zinc-800 bg-zinc-900/60">
+                  <Card className="border-[#2A3241] bg-[#13171D] rounded">
                     <CardHeader className="p-4 pb-2">
-                      <CardDescription className="text-xs font-medium text-zinc-400">
+                      <CardDescription className="text-xs font-medium text-[#7E8B9B]">
                         Decision Engine Confidence Score
                       </CardDescription>
-                      <CardTitle className="text-2xl font-bold font-mono text-cyan-400 flex items-baseline gap-2">
+                      <CardTitle className="text-2xl font-bold font-mono text-[#D4F63C] flex items-baseline gap-2">
                         {(ticket.prediction.confidence_score * 100).toFixed(1)}%
-                        <span className="text-xs font-normal text-zinc-400">calibrated</span>
+                        <span className="text-xs font-normal text-[#7E8B9B]">calibrated</span>
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="p-4 pt-1">
                       <Progress
                         value={ticket.prediction.confidence_score * 100}
-                        indicatorClassName="bg-cyan-500"
+                        indicatorClassName="bg-[#D4F63C]"
                       />
-                      <div className="mt-2 text-[11px] text-zinc-400">
+                      <div className="mt-2 text-[11px] text-[#7E8B9B]">
                         Mapped to 2x2 action matrix for zero-false-positive technician deployment.
                       </div>
                     </CardContent>
@@ -463,15 +460,15 @@ export const DispatchTicketModal: React.FC<DispatchTicketModalProps> = ({
                 {/* Live Telemetry vs Baseline Reference Table */}
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <h4 className="text-xs font-semibold text-zinc-300 uppercase tracking-wider">
+                    <h4 className="text-xs font-semibold text-[#EDEDED] uppercase tracking-wider">
                       Live Telemetry vs. Nominal Training Baselines
                     </h4>
-                    <span className="text-[11px] text-zinc-500">AI4I 2020 Standard Scale Reference</span>
+                    <span className="text-[11px] text-[#7E8B9B]">AI4I 2020 Standard Scale Reference</span>
                   </div>
 
-                  <div className="rounded-xl border border-zinc-800 overflow-hidden bg-zinc-900/40">
+                  <div className="rounded border border-[#2A3241] overflow-hidden bg-[#13171D]">
                     <table className="w-full text-xs">
-                      <thead className="bg-zinc-900/90 text-zinc-400 border-b border-zinc-800 font-mono">
+                      <thead className="bg-[#0D0F12] text-[#7E8B9B] border-b border-[#2A3241] font-mono">
                         <tr>
                           <th className="py-2.5 px-3 text-left">Telemetry Metric</th>
                           <th className="py-2.5 px-3 text-right">Actual Ingested</th>
@@ -480,26 +477,26 @@ export const DispatchTicketModal: React.FC<DispatchTicketModalProps> = ({
                           <th className="py-2.5 px-3 text-center">Risk Direction</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-zinc-800 font-mono text-zinc-200">
+                      <tbody className="divide-y divide-[#212631] font-mono text-[#EDEDED]">
                         {baselineComparisons.map((item, idx) => (
-                          <tr key={idx} className="hover:bg-zinc-800/30">
-                            <td className="py-2 px-3 font-sans font-medium text-zinc-300">{item.displayName}</td>
-                            <td className="py-2 px-3 text-right font-bold text-cyan-300">
+                          <tr key={idx} className="hover:bg-[#181D24]">
+                            <td className="py-2 px-3 font-sans font-medium text-[#EDEDED]">{item.displayName}</td>
+                            <td className="py-2 px-3 text-right font-bold text-[#D4F63C]">
                               {item.actualValue} {item.unit}
                             </td>
-                            <td className="py-2 px-3 text-right text-zinc-400">
+                            <td className="py-2 px-3 text-right text-[#7E8B9B]">
                               {item.baselineMean} {item.unit}
                             </td>
-                            <td className={`py-2 px-3 text-right font-bold ${item.delta > 0 ? "text-red-400" : "text-emerald-400"}`}>
+                            <td className={`py-2 px-3 text-right font-bold ${item.delta > 0 ? "text-[#FF3B30]" : "text-[#D4F63C]"}`}>
                               {item.delta > 0 ? `+${item.delta}` : item.delta} {item.unit}
                             </td>
                             <td className="py-2 px-3 text-center">
                               {item.impactsRisk ? (
-                                <span className="inline-flex items-center gap-1 text-[11px] text-red-400 bg-red-500/10 px-2 py-0.5 rounded border border-red-500/30">
+                                <span className="inline-flex items-center gap-1 text-[11px] text-[#FF3B30] bg-[#FF3B30]/10 px-2 py-0.5 rounded border border-[#FF3B30]/30">
                                   Increases Failure Risk
                                 </span>
                               ) : (
-                                <span className="inline-flex items-center gap-1 text-[11px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/30">
+                                <span className="inline-flex items-center gap-1 text-[11px] text-[#D4F63C] bg-[#D4F63C]/10 px-2 py-0.5 rounded border border-[#D4F63C]/30">
                                   Mitigates Risk
                                 </span>
                               )}
@@ -518,25 +515,25 @@ export const DispatchTicketModal: React.FC<DispatchTicketModalProps> = ({
               <div className="space-y-5">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-sm font-bold text-zinc-100 flex items-center gap-2">
-                      <Activity className="w-4 h-4 text-cyan-400" /> Local Feature Attribution Waterfall
+                    <h3 className="text-sm font-bold text-[#EDEDED] flex items-center gap-2 font-mono">
+                      <Activity className="w-4 h-4 text-[#D4F63C]" /> Local Feature Attribution Waterfall
                     </h3>
-                    <p className="text-xs text-zinc-400">
-                      Signed SHAP coefficients: positive values (red) push toward failure, negative values (green) keep machine safe.
+                    <p className="text-xs text-[#7E8B9B]">
+                      Signed SHAP coefficients: positive values (crimson) push toward failure, negative values (volt) keep machine safe.
                     </p>
                   </div>
                   <div className="flex items-center gap-3 text-xs font-mono">
-                    <span className="flex items-center gap-1.5 text-red-400">
-                      <span className="w-2.5 h-2.5 rounded-sm bg-red-500" /> +Risk Driver
+                    <span className="flex items-center gap-1.5 text-[#FF3B30]">
+                      <span className="w-2.5 h-2.5 rounded-sm bg-[#FF3B30]" /> +Risk Driver
                     </span>
-                    <span className="flex items-center gap-1.5 text-emerald-400">
-                      <span className="w-2.5 h-2.5 rounded-sm bg-emerald-500" /> -Safe Buffer
+                    <span className="flex items-center gap-1.5 text-[#D4F63C]">
+                      <span className="w-2.5 h-2.5 rounded-sm bg-[#D4F63C]" /> -Safe Buffer
                     </span>
                   </div>
                 </div>
 
                 {/* Diverging Bar Chart */}
-                <div className="h-64 rounded-xl border border-zinc-800 bg-zinc-900/60 p-4">
+                <div className="h-64 rounded border border-[#2A3241] bg-[#13171D] p-4">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart
                       data={chartData}
@@ -545,29 +542,31 @@ export const DispatchTicketModal: React.FC<DispatchTicketModalProps> = ({
                     >
                       <XAxis
                         type="number"
-                        stroke="#64748b"
+                        stroke="#7E8B9B"
                         fontSize={11}
+                        fontFamily="monospace"
                         tickFormatter={(val) => `${val}%`}
                       />
                       <YAxis
                         type="category"
                         dataKey="name"
-                        stroke="#94a3b8"
+                        stroke="#EDEDED"
                         fontSize={11}
+                        fontFamily="monospace"
                         tickLine={false}
                       />
                       <Tooltip
-                        cursor={{ fill: "rgba(255,255,255,0.05)" }}
+                        cursor={{ fill: "rgba(255,255,255,0.03)" }}
                         content={({ active, payload }) => {
                           if (active && payload && payload.length) {
                             const data = payload[0].payload;
                             return (
-                              <div className="rounded-lg bg-zinc-900 p-2.5 border border-zinc-700 shadow-xl text-xs font-mono">
-                                <div className="font-bold text-zinc-100 mb-1">{data.name}</div>
-                                <div className={data.value > 0 ? "text-red-400" : "text-emerald-400"}>
+                              <div className="rounded bg-[#0D0F12] p-2.5 border border-[#2A3241] shadow-xl text-xs font-mono">
+                                <div className="font-bold text-[#EDEDED] mb-1">{data.name}</div>
+                                <div className={data.value > 0 ? "text-[#FF3B30]" : "text-[#D4F63C]"}>
                                   SHAP Impact: {data.value > 0 ? `+${data.value}%` : `${data.value}%`}
                                 </div>
-                                <div className="text-zinc-400 text-[10px] mt-0.5">
+                                <div className="text-[#7E8B9B] text-[10px] mt-0.5">
                                   {data.value > 0
                                     ? "Increases probability of equipment breakdown"
                                     : "Contributes to stable operational safety"}
@@ -578,12 +577,12 @@ export const DispatchTicketModal: React.FC<DispatchTicketModalProps> = ({
                           return null;
                         }}
                       />
-                      <ReferenceLine x={0} stroke="#475569" strokeWidth={1.5} />
-                      <Bar dataKey="value" radius={[4, 4, 4, 4]}>
+                      <ReferenceLine x={0} stroke="#2A3241" strokeWidth={1.5} />
+                      <Bar dataKey="value" radius={[2, 2, 2, 2]}>
                         {chartData.map((entry, index) => (
                           <Cell
                             key={`cell-${index}`}
-                            fill={entry.value > 0 ? "#ef4444" : "#10b981"}
+                            fill={entry.value > 0 ? "#FF3B30" : "#D4F63C"}
                           />
                         ))}
                       </Bar>
@@ -593,7 +592,7 @@ export const DispatchTicketModal: React.FC<DispatchTicketModalProps> = ({
 
                 {/* Ranked Risk Drivers */}
                 <div className="space-y-2">
-                  <h4 className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">
+                  <h4 className="text-xs font-semibold text-[#7E8B9B] uppercase tracking-wider">
                     Ranked Root Cause Contributors & Corrective Action
                   </h4>
                   <div className="space-y-2">
@@ -603,22 +602,22 @@ export const DispatchTicketModal: React.FC<DispatchTicketModalProps> = ({
                       .map((driver, idx) => (
                         <div
                           key={idx}
-                          className="flex items-center justify-between p-3 rounded-xl border border-red-500/20 bg-red-950/10 text-xs"
+                          className="flex items-center justify-between p-3 rounded border border-[#FF3B30]/30 bg-[#13171D] text-xs font-mono"
                         >
                           <div className="flex items-center gap-2.5">
-                            <span className="w-5 h-5 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center font-bold font-mono">
+                            <span className="w-5 h-5 rounded bg-[#FF3B30]/20 text-[#FF3B30] flex items-center justify-center font-bold">
                               {idx + 1}
                             </span>
                             <div>
-                              <span className="font-bold text-zinc-200">
+                              <span className="font-bold text-[#EDEDED]">
                                 {driver.feature.replace(/_/g, " ").toUpperCase()}
                               </span>
-                              <span className="text-zinc-400 text-[11px] ml-2">
+                              <span className="text-[#7E8B9B] text-[11px] ml-2">
                                 (SHAP weight: +{(driver.value * 100).toFixed(1)}%)
                               </span>
                             </div>
                           </div>
-                          <span className="text-red-400 font-mono font-medium">Primary Fault Driver</span>
+                          <span className="text-[#FF3B30] font-medium">Primary Fault Driver</span>
                         </div>
                       ))}
                   </div>
@@ -631,18 +630,18 @@ export const DispatchTicketModal: React.FC<DispatchTicketModalProps> = ({
               <div className="space-y-5">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-sm font-bold text-zinc-100 flex items-center gap-2">
-                      <Wrench className="w-4 h-4 text-cyan-400" /> Dynamic Standard Operating Procedure (SOP)
+                    <h3 className="text-sm font-bold text-[#EDEDED] flex items-center gap-2 font-mono">
+                      <Wrench className="w-4 h-4 text-[#D4F63C]" /> Dynamic Standard Operating Procedure (SOP)
                     </h3>
-                    <p className="text-xs text-zinc-400">
+                    <p className="text-xs text-[#7E8B9B]">
                       Tailored protocol generated specifically for {ticket.failureMode.name} on Machine {ticket.machineId}.
                     </p>
                   </div>
                   <div className="text-right">
-                    <span className="text-xs font-mono text-cyan-300 font-bold">
+                    <span className="text-xs font-mono text-[#D4F63C] font-bold">
                       {completedCount} / {checklist.length} Completed ({progressPct.toFixed(0)}%)
                     </span>
-                    <Progress value={progressPct} className="w-32 h-1.5 mt-1" />
+                    <Progress value={progressPct} indicatorClassName="bg-[#D4F63C]" className="w-32 h-1.5 mt-1" />
                   </div>
                 </div>
 
@@ -651,18 +650,18 @@ export const DispatchTicketModal: React.FC<DispatchTicketModalProps> = ({
                     <div
                       key={item.id}
                       onClick={() => toggleChecklistItem(item.id)}
-                      className={`flex items-start gap-3 p-3.5 rounded-xl border transition-all cursor-pointer select-none ${
+                      className={`flex items-start gap-3 p-3.5 rounded border transition-all cursor-pointer select-none font-mono ${
                         item.completed
-                          ? "bg-emerald-950/20 border-emerald-500/30 text-zinc-400 line-through"
-                          : "bg-zinc-900/70 border-zinc-800 hover:border-zinc-700 text-zinc-200"
+                          ? "bg-[#13171D] border-[#2A3241] text-[#7E8B9B] line-through"
+                          : "bg-[#13171D] border-[#212631] hover:border-[#2A3241] text-[#EDEDED]"
                       }`}
                     >
                       <div className="mt-0.5">
                         <div
                           className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${
                             item.completed
-                              ? "bg-emerald-500 border-emerald-500 text-zinc-950"
-                              : "border-zinc-600 bg-zinc-800"
+                              ? "bg-[#D4F63C] border-[#D4F63C] text-black"
+                              : "border-[#2A3241] bg-[#181D24]"
                           }`}
                         >
                           {item.completed && <Check className="w-3 h-3 stroke-[3]" />}
@@ -673,12 +672,12 @@ export const DispatchTicketModal: React.FC<DispatchTicketModalProps> = ({
                         <div className="flex items-center gap-2">
                           <span className="text-xs font-medium font-sans">{item.step}</span>
                           {item.critical && (
-                            <Badge variant="destructive" size="sm">
+                            <Badge variant="destructive" size="sm" className="rounded">
                               MANDATORY
                             </Badge>
                           )}
                         </div>
-                        <span className="text-[10px] text-zinc-500 font-mono uppercase tracking-wider block mt-1">
+                        <span className="text-[10px] text-[#7E8B9B] uppercase tracking-wider block mt-1">
                           Category: {item.category}
                         </span>
                       </div>
@@ -687,15 +686,15 @@ export const DispatchTicketModal: React.FC<DispatchTicketModalProps> = ({
                 </div>
 
                 {ticket.prediction.safety_measures.length > 0 && (
-                  <div className="p-4 rounded-xl border border-zinc-800 bg-zinc-900/40 space-y-2">
-                    <h4 className="text-xs font-bold text-zinc-300 flex items-center gap-2">
-                      <ShieldAlert className="w-4 h-4 text-amber-400" /> Mandatory Equipment Safety Directives:
+                  <div className="p-4 rounded border border-[#2A3241] bg-[#13171D] space-y-2">
+                    <h4 className="text-xs font-bold text-[#EDEDED] flex items-center gap-2 font-mono">
+                      <ShieldAlert className="w-4 h-4 text-[#FF3B30]" /> Mandatory Equipment Safety Directives:
                     </h4>
-                    <ul className="space-y-1.5 pl-2">
+                    <ul className="space-y-1.5 pl-2 font-mono">
                       {ticket.prediction.safety_measures.map((measure, i) => (
-                        <li key={i} className="text-xs text-zinc-300 flex items-start gap-2">
-                          <ChevronRight className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
-                          <span>{measure}</span>
+                        <li key={i} className="text-xs text-[#7E8B9B] flex items-start gap-2">
+                          <ChevronRight className="w-3.5 h-3.5 text-[#D4F63C] shrink-0 mt-0.5" />
+                          <span className="text-[#EDEDED]">{measure}</span>
                         </li>
                       ))}
                     </ul>
@@ -708,26 +707,26 @@ export const DispatchTicketModal: React.FC<DispatchTicketModalProps> = ({
             {activeTab === "workflow" && (
               <div className="space-y-5">
                 <div>
-                  <h3 className="text-sm font-bold text-zinc-100 flex items-center gap-2">
-                    <UserCheck className="w-4 h-4 text-cyan-400" /> Technician Assignment & Dispatch Order
+                  <h3 className="text-sm font-bold text-[#EDEDED] flex items-center gap-2 font-mono">
+                    <UserCheck className="w-4 h-4 text-[#D4F63C]" /> Technician Assignment & Dispatch Order
                   </h3>
-                  <p className="text-xs text-zinc-400">
+                  <p className="text-xs text-[#7E8B9B]">
                     Assign field personnel, configure urgency override, and broadcast work order to shop-floor pager.
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="text-xs font-semibold text-zinc-300 block mb-1.5">
+                    <label className="text-xs font-semibold text-[#EDEDED] block mb-1.5">
                       Assign Duty Technician
                     </label>
                     <select
                       value={technician}
                       onChange={(e) => setTechnician(e.target.value)}
-                      className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-3.5 py-2.5 text-xs text-zinc-100 focus:outline-none focus:border-cyan-500 transition-colors font-mono cursor-pointer"
+                      className="w-full bg-[#13171D] border border-[#2A3241] rounded px-3.5 py-2.5 text-xs text-[#EDEDED] focus:outline-none focus:border-[#D4F63C] focus:ring-1 focus:ring-[#D4F63C] transition-colors font-mono cursor-pointer"
                     >
                       {TECHNICIANS.map((tech) => (
-                        <option key={tech.name} value={tech.name}>
+                        <option key={tech.name} value={tech.name} className="bg-[#13171D] text-[#EDEDED]">
                           {tech.name} — {tech.role} ({tech.shift})
                         </option>
                       ))}
@@ -735,24 +734,24 @@ export const DispatchTicketModal: React.FC<DispatchTicketModalProps> = ({
                   </div>
 
                   <div>
-                    <label className="text-xs font-semibold text-zinc-300 block mb-1.5">
+                    <label className="text-xs font-semibold text-[#EDEDED] block mb-1.5">
                       Priority Level Override
                     </label>
                     <select
                       value={priorityOverride}
                       onChange={(e) => setPriorityOverride(e.target.value as PriorityLevel)}
-                      className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-3.5 py-2.5 text-xs text-zinc-100 focus:outline-none focus:border-cyan-500 transition-colors font-mono cursor-pointer"
+                      className="w-full bg-[#13171D] border border-[#2A3241] rounded px-3.5 py-2.5 text-xs text-[#EDEDED] focus:outline-none focus:border-[#D4F63C] focus:ring-1 focus:ring-[#D4F63C] transition-colors font-mono cursor-pointer"
                     >
-                      <option value="CRITICAL">CRITICAL (Immediate Line Stoppage)</option>
-                      <option value="ELEVATED">ELEVATED (Inspect Within 2 Hours)</option>
-                      <option value="STANDARD">STANDARD (Next Maintenance Window)</option>
-                      <option value="LOW">LOW (Log For Next Shift Handover)</option>
+                      <option value="CRITICAL" className="bg-[#13171D] text-[#EDEDED]">CRITICAL (Immediate Line Stoppage)</option>
+                      <option value="ELEVATED" className="bg-[#13171D] text-[#EDEDED]">ELEVATED (Inspect Within 2 Hours)</option>
+                      <option value="STANDARD" className="bg-[#13171D] text-[#EDEDED]">STANDARD (Next Maintenance Window)</option>
+                      <option value="LOW" className="bg-[#13171D] text-[#EDEDED]">LOW (Log For Next Shift Handover)</option>
                     </select>
                   </div>
                 </div>
 
                 <div>
-                  <label className="text-xs font-semibold text-zinc-300 block mb-1.5">
+                  <label className="text-xs font-semibold text-[#EDEDED] block mb-1.5">
                     Technician Work Order Notes & Observations
                   </label>
                   <textarea
@@ -760,7 +759,7 @@ export const DispatchTicketModal: React.FC<DispatchTicketModalProps> = ({
                     value={ticketNotes}
                     onChange={(e) => setTicketNotes(e.target.value)}
                     placeholder="Enter specific machine cell notes, spare part stock codes, or clearance requirements..."
-                    className="w-full bg-zinc-900 border border-zinc-700 rounded-xl p-3 text-xs text-zinc-100 focus:outline-none focus:border-cyan-500 transition-colors resize-none"
+                    className="w-full bg-[#13171D] border border-[#2A3241] rounded p-3 text-xs text-[#EDEDED] focus:outline-none focus:border-[#D4F63C] focus:ring-1 focus:ring-[#D4F63C] transition-colors resize-none font-mono"
                   />
                 </div>
 
@@ -768,9 +767,9 @@ export const DispatchTicketModal: React.FC<DispatchTicketModalProps> = ({
                   <motion.div
                     initial={{ opacity: 0, y: -6 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="p-3.5 rounded-xl border border-emerald-500/40 bg-emerald-950/20 text-emerald-300 text-xs flex items-center gap-2.5 font-mono"
+                    className="p-3.5 rounded border border-[#D4F63C]/40 bg-[#13171D] text-[#D4F63C] text-xs flex items-center gap-2.5 font-mono"
                   >
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-[#D4F63C] shrink-0" />
                     <span>{dispatchSuccessMsg}</span>
                   </motion.div>
                 )}
@@ -779,13 +778,13 @@ export const DispatchTicketModal: React.FC<DispatchTicketModalProps> = ({
           </div>
 
           {/* Modal Footer with Actions */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 p-4 md:px-6 border-t border-zinc-800 bg-zinc-900/60 sticky bottom-0 z-20">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 p-4 md:px-6 border-t border-[#2A3241] bg-[#13171D] sticky bottom-0 z-20">
             <div className="flex items-center gap-2 w-full sm:w-auto">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={handlePrint}
-                className="gap-1.5 text-xs text-zinc-300"
+                className="gap-1.5 text-xs text-[#EDEDED] border-[#2A3241] hover:bg-[#181D24]"
               >
                 <Printer className="w-3.5 h-3.5" /> Print Work Order
               </Button>
@@ -796,17 +795,17 @@ export const DispatchTicketModal: React.FC<DispatchTicketModalProps> = ({
                 variant="secondary"
                 size="sm"
                 onClick={onClose}
-                className="text-xs"
+                className="text-xs bg-[#181D24] hover:bg-[#212631] text-[#EDEDED] border border-[#2A3241]"
               >
                 Close
               </Button>
 
               <Button
-                variant="gradient"
+                variant="volt"
                 size="sm"
                 disabled={isDispatching}
                 onClick={handleDispatch}
-                className="gap-2 text-xs font-bold"
+                className="gap-2 text-xs font-bold shadow-none"
               >
                 {isDispatching ? (
                   <>

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useRef, useTransition } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import Papa from "papaparse";
 import {
   Upload,
@@ -16,9 +15,6 @@ import {
   Database,
   Download,
   Play,
-  ArrowRight,
-  ExternalLink,
-  Layers,
 } from "lucide-react";
 import { BatchTelemetryRow, MaintenanceTicket, CSVParsingError, FailureModeInfo } from "@/types/ticket";
 import { SensorInputData, MachineType } from "@/types/prediction";
@@ -306,17 +302,17 @@ export const CSVBatchUploader: React.FC<CSVBatchUploaderProps> = ({
   return (
     <div className="space-y-6">
       {/* Dropzone & Control Hub Header */}
-      <Card className="border-zinc-800 bg-zinc-950/80 backdrop-blur-xl relative overflow-hidden">
+      <Card className="border-[#2A3241] bg-[#181D24]">
         <CardHeader className="p-6 pb-4">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
             <div className="space-y-1">
-              <CardTitle className="text-lg md:text-xl font-bold text-zinc-100 flex items-center gap-2.5">
-                <div className="p-2 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
+              <CardTitle className="text-lg md:text-xl font-bold text-[#EDEDED] flex items-center gap-2.5 font-mono">
+                <div className="p-2 rounded-lg bg-[#13171D] border border-[#2A3241] text-[#D4F63C]">
                   <FileSpreadsheet className="w-5 h-5" />
                 </div>
                 Fleet CSV Telemetry Ingestion Hub
               </CardTitle>
-              <CardDescription className="text-xs text-zinc-400">
+              <CardDescription className="text-xs text-[#7E8B9B]">
                 Batch inference engine over AI4I 2020 predictive maintenance streams with automated failure mode classification and dispatch ticketing.
               </CardDescription>
             </div>
@@ -326,10 +322,10 @@ export const CSVBatchUploader: React.FC<CSVBatchUploaderProps> = ({
               <a
                 href="/batch_fleet_telemetry.csv"
                 download="batch_fleet_telemetry.csv"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-zinc-900 border border-zinc-700 hover:border-cyan-500/50 hover:bg-zinc-800 text-zinc-200 transition-all shadow-sm"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold bg-[#13171D] border border-[#2A3241] hover:border-[#D4F63C] hover:text-[#D4F63C] text-[#EDEDED] transition-colors shadow-sm"
                 title="Download complete 24-machine telemetry dataset"
               >
-                <Download className="w-3.5 h-3.5 text-cyan-400" />
+                <Download className="w-3.5 h-3.5 text-[#D4F63C]" />
                 Download Batch CSV
               </a>
 
@@ -337,9 +333,9 @@ export const CSVBatchUploader: React.FC<CSVBatchUploaderProps> = ({
                 variant="outline"
                 size="sm"
                 onClick={() => parseAndEvaluateCSV(SAMPLE_FLEET_DATASET_CSV, "batch_fleet_telemetry.csv")}
-                className="text-xs h-8 gap-1.5 font-mono border-zinc-700 bg-zinc-900/80 text-cyan-300 hover:bg-zinc-800"
+                className="text-xs h-8 gap-1.5 font-mono border-[#2A3241] bg-[#13171D] text-[#D4F63C] hover:bg-[#181D24]"
               >
-                <Database className="w-3.5 h-3.5 text-cyan-400" />
+                <Database className="w-3.5 h-3.5 text-[#D4F63C]" />
                 Load Full Fleet (24 Units)
               </Button>
 
@@ -366,10 +362,10 @@ export const CSVBatchUploader: React.FC<CSVBatchUploaderProps> = ({
             onDragLeave={() => setIsDragging(false)}
             onDrop={handleDrop}
             onClick={() => fileInputRef.current?.click()}
-            className={`group relative border-2 border-dashed rounded-2xl p-7 text-center transition-all duration-300 cursor-pointer select-none ${
+            className={`border border-dashed rounded-xl p-6 text-center transition-colors cursor-pointer select-none ${
               isDragging
-                ? "border-cyan-400 bg-cyan-500/10 shadow-xl shadow-cyan-500/20"
-                : "border-zinc-800/80 bg-zinc-900/30 hover:border-cyan-500/40 hover:bg-zinc-900/60"
+                ? "border-[#D4F63C] bg-[#13171D]"
+                : "border-[#2A3241] bg-[#13171D] hover:border-[#D4F63C]"
             }`}
           >
             <input
@@ -379,22 +375,22 @@ export const CSVBatchUploader: React.FC<CSVBatchUploaderProps> = ({
               onChange={handleFileUpload}
               className="hidden"
             />
-            <div className="flex flex-col items-center justify-center gap-2.5">
-              <div className="p-3.5 rounded-2xl bg-zinc-900 border border-zinc-700/80 text-cyan-400 shadow-md transition-transform duration-300 group-hover:scale-105 group-hover:border-cyan-500/50">
-                <Upload className="w-6 h-6" />
+            <div className="flex flex-col items-center justify-center gap-2">
+              <div className="p-3 rounded-lg bg-[#181D24] border border-[#2A3241] text-[#D4F63C]">
+                <Upload className="w-5 h-5" />
               </div>
               <div className="space-y-1">
-                <p className="text-sm font-bold text-zinc-100">
+                <p className="text-sm font-bold text-[#EDEDED] font-mono">
                   {fileName ? (
-                    <span className="text-cyan-400 font-mono flex items-center justify-center gap-1.5">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400" /> Loaded: {fileName}
+                    <span className="text-[#D4F63C] flex items-center justify-center gap-1.5">
+                      <CheckCircle2 className="w-4 h-4 text-[#D4F63C]" /> Loaded: {fileName}
                     </span>
                   ) : (
                     "Drop Telemetry CSV here or click to browse"
                   )}
                 </p>
-                <p className="text-xs text-zinc-400 font-mono">
-                  Schema: <span className="text-zinc-300">air_temperature, process_temperature, rotational_speed, torque, tool_wear, type</span>
+                <p className="text-xs text-[#7E8B9B] font-mono">
+                  Schema: <span className="text-[#EDEDED]">air_temperature, process_temperature, rotational_speed, torque, tool_wear, type</span>
                 </p>
               </div>
             </div>
@@ -402,11 +398,11 @@ export const CSVBatchUploader: React.FC<CSVBatchUploaderProps> = ({
 
           {/* Validation Warnings */}
           {parsingErrors.length > 0 && (
-            <div className="p-3.5 rounded-xl border border-amber-500/30 bg-amber-950/20 text-xs text-amber-300 space-y-1">
+            <div className="p-3.5 rounded-lg border border-[#F5A623] bg-[#13171D] text-xs text-[#F5A623] space-y-1 font-mono">
               <div className="font-bold flex items-center gap-1.5">
-                <AlertTriangle className="w-4 h-4 text-amber-400" /> Telemetry Warnings ({parsingErrors.length})
+                <AlertTriangle className="w-4 h-4 text-[#F5A623]" /> Telemetry Warnings ({parsingErrors.length})
               </div>
-              <ul className="list-disc pl-5 space-y-0.5 text-[11px] text-amber-200/80">
+              <ul className="list-disc pl-5 space-y-0.5 text-[11px] text-[#EDEDED]">
                 {parsingErrors.slice(0, 3).map((err, i) => (
                   <li key={i}>{err.message} (Row {err.row})</li>
                 ))}
@@ -416,65 +412,65 @@ export const CSVBatchUploader: React.FC<CSVBatchUploaderProps> = ({
         </CardContent>
       </Card>
 
-      {/* Fleet KPI Banner with VengeanceUI GlowBorderCard */}
+      {/* Fleet KPI Banner */}
       {rows.length > 0 && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Card className="border-zinc-800 bg-zinc-900/60 p-4">
-            <div className="text-xs text-zinc-400 font-medium">Ingested Fleet Size</div>
-            <div className="text-2xl font-bold font-mono text-zinc-100 mt-1">{totalCount} Units</div>
-            <div className="text-[11px] text-zinc-500 mt-1 font-mono flex items-center gap-1">
-              <Database className="w-3 h-3 text-cyan-400" /> AI4I 2020 Batch Stream
+          <Card className="border-[#2A3241] bg-[#181D24] p-4">
+            <div className="text-xs text-[#7E8B9B] font-mono font-medium">Ingested Fleet Size</div>
+            <div className="text-2xl font-bold font-mono text-[#EDEDED] mt-1">{totalCount} Units</div>
+            <div className="text-[11px] text-[#7E8B9B] mt-1 font-mono flex items-center gap-1">
+              <Database className="w-3 h-3 text-[#D4F63C]" /> AI4I 2020 Batch Stream
             </div>
           </Card>
 
           {criticalCount > 0 ? (
-            <GlowBorderCard colorPreset="hazard" borderRadius="0.75rem" className="p-4 bg-zinc-950/90">
-              <div className="text-xs text-red-400 font-bold flex items-center gap-1.5">
-                <ShieldAlert className="w-3.5 h-3.5 text-red-400" /> Critical Hazards (μ &gt; 0.65)
+            <GlowBorderCard colorPreset="hazard" className="p-4 border-[#FF3B30] bg-[#181D24]">
+              <div className="text-xs text-[#FF3B30] font-bold flex items-center gap-1.5 font-mono">
+                <ShieldAlert className="w-3.5 h-3.5 text-[#FF3B30]" /> Critical Hazards (μ &gt; 0.65)
               </div>
-              <div className="text-2xl font-black font-mono text-red-400 mt-1">{criticalCount} Units</div>
-              <div className="text-[11px] text-red-300/80 mt-1 font-mono">
+              <div className="text-2xl font-black font-mono text-[#FF3B30] mt-1">{criticalCount} Units</div>
+              <div className="text-[11px] text-[#FF3B30]/80 mt-1 font-mono">
                 Immediate Work Orders Required
               </div>
             </GlowBorderCard>
           ) : (
-            <Card className="border-zinc-800 bg-zinc-900/60 p-4">
-              <div className="text-xs text-emerald-400 font-medium flex items-center gap-1.5">
+            <Card className="border-[#2A3241] bg-[#181D24] p-4">
+              <div className="text-xs text-[#D4F63C] font-mono font-medium flex items-center gap-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5" /> Critical Hazards
               </div>
-              <div className="text-2xl font-bold font-mono text-zinc-100 mt-1">0 Units</div>
-              <div className="text-[11px] text-zinc-500 mt-1 font-mono">No critical failures detected</div>
+              <div className="text-2xl font-bold font-mono text-[#EDEDED] mt-1">0 Units</div>
+              <div className="text-[11px] text-[#7E8B9B] mt-1 font-mono">No critical failures detected</div>
             </Card>
           )}
 
           {uncertainCount > 0 ? (
-            <GlowBorderCard colorPreset="sunset" borderRadius="0.75rem" className="p-4 bg-zinc-950/90">
-              <div className="text-xs text-amber-400 font-bold flex items-center gap-1.5">
-                <Activity className="w-3.5 h-3.5 text-amber-400" /> High Uncertainty (σ &gt; 0.08)
+            <GlowBorderCard colorPreset="sunset" className="p-4 border-[#F5A623] bg-[#181D24]">
+              <div className="text-xs text-[#F5A623] font-bold flex items-center gap-1.5 font-mono">
+                <Activity className="w-3.5 h-3.5 text-[#F5A623]" /> High Uncertainty (σ &gt; 0.08)
               </div>
-              <div className="text-2xl font-black font-mono text-amber-400 mt-1">{uncertainCount} Units</div>
-              <div className="text-[11px] text-amber-300/80 mt-1 font-mono">
+              <div className="text-2xl font-black font-mono text-[#F5A623] mt-1">{uncertainCount} Units</div>
+              <div className="text-[11px] text-[#F5A623]/80 mt-1 font-mono">
                 Epistemic Divergence Detected
               </div>
             </GlowBorderCard>
           ) : (
-            <Card className="border-zinc-800 bg-zinc-900/60 p-4">
-              <div className="text-xs text-zinc-400 font-medium flex items-center gap-1.5">
-                <Activity className="w-3.5 h-3.5 text-cyan-400" /> High Uncertainty
+            <Card className="border-[#2A3241] bg-[#181D24] p-4">
+              <div className="text-xs text-[#7E8B9B] font-mono font-medium flex items-center gap-1.5">
+                <Activity className="w-3.5 h-3.5 text-[#D4F63C]" /> High Uncertainty
               </div>
-              <div className="text-2xl font-bold font-mono text-zinc-100 mt-1">0 Units</div>
-              <div className="text-[11px] text-zinc-500 mt-1 font-mono">All predictions within confidence bound</div>
+              <div className="text-2xl font-bold font-mono text-[#EDEDED] mt-1">0 Units</div>
+              <div className="text-[11px] text-[#7E8B9B] mt-1 font-mono">All predictions within confidence bound</div>
             </Card>
           )}
 
-          <GlowBorderCard colorPreset="nature" borderRadius="0.75rem" className="p-4 bg-zinc-950/90">
-            <div className="text-xs text-emerald-400 font-bold flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Fleet Health Index
+          <GlowBorderCard colorPreset="volt" className="p-4 border-[#D4F63C] bg-[#181D24]">
+            <div className="text-xs text-[#D4F63C] font-bold flex items-center gap-1.5 font-mono">
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#D4F63C]" /> Fleet Health Index
             </div>
-            <div className="text-2xl font-black font-mono text-emerald-400 mt-1">
+            <div className="text-2xl font-black font-mono text-[#D4F63C] mt-1">
               {fleetHealthScore.toFixed(0)}%
             </div>
-            <div className="text-[11px] text-emerald-300/80 mt-1 font-mono">
+            <div className="text-[11px] text-[#EDEDED] mt-1 font-mono">
               {nominalCount} Units in Nominal Range
             </div>
           </GlowBorderCard>
@@ -483,23 +479,23 @@ export const CSVBatchUploader: React.FC<CSVBatchUploaderProps> = ({
 
       {/* Telemetry Evaluation Table */}
       {rows.length > 0 && (
-        <Card className="border-zinc-800 bg-zinc-950/90 backdrop-blur-md overflow-hidden">
-          <CardHeader className="p-4 md:p-5 border-b border-zinc-800 flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <Card className="border-[#2A3241] bg-[#181D24] overflow-hidden">
+          <CardHeader className="p-4 md:p-5 border-b border-[#2A3241] flex flex-col md:flex-row md:items-center justify-between gap-3">
             {/* Filter Tabs */}
             <div className="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0">
               {[
                 { id: "all", label: `All Machines (${totalCount})` },
-                { id: "anomalous", label: `Critical Hazards (${criticalCount})`, color: "text-red-400" },
-                { id: "uncertain", label: `High Uncertainty (${uncertainCount})`, color: "text-amber-400" },
-                { id: "nominal", label: `Nominal Units (${nominalCount})`, color: "text-emerald-400" },
+                { id: "anomalous", label: `Critical Hazards (${criticalCount})`, color: "text-[#FF3B30]" },
+                { id: "uncertain", label: `High Uncertainty (${uncertainCount})`, color: "text-[#F5A623]" },
+                { id: "nominal", label: `Nominal Units (${nominalCount})`, color: "text-[#D4F63C]" },
               ].map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => setFilterTab(tab.id as typeof filterTab)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all cursor-pointer whitespace-nowrap ${
+                  className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-colors cursor-pointer whitespace-nowrap ${
                     filterTab === tab.id
-                      ? "bg-zinc-800 text-white border border-zinc-700 shadow-sm"
-                      : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900"
+                      ? "bg-[#13171D] text-[#D4F63C] border border-[#2A3241]"
+                      : "text-[#7E8B9B] hover:text-[#EDEDED] hover:bg-[#13171D]/60"
                   }`}
                 >
                   <span className={tab.color || ""}>{tab.label}</span>
@@ -510,18 +506,18 @@ export const CSVBatchUploader: React.FC<CSVBatchUploaderProps> = ({
             {/* Search & Status Indicator */}
             <div className="flex items-center gap-2.5">
               <div className="relative">
-                <Search className="w-3.5 h-3.5 text-zinc-500 absolute left-2.5 top-1/2 -translate-y-1/2" />
+                <Search className="w-3.5 h-3.5 text-[#7E8B9B] absolute left-2.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
                   placeholder="Filter Machine ID or Mode..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="bg-zinc-900 border border-zinc-700/80 rounded-lg pl-8 pr-3 py-1.5 text-xs text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500 font-mono transition-all w-48 md:w-56"
+                  className="bg-[#13171D] border border-[#2A3241] rounded-lg pl-8 pr-3 py-1.5 text-xs text-[#EDEDED] placeholder:text-[#7E8B9B] focus:outline-none focus:border-[#D4F63C] font-mono transition-colors w-48 md:w-56"
                 />
               </div>
 
               {isEvaluating && (
-                <div className="flex items-center gap-1.5 text-xs text-cyan-400 font-mono">
+                <div className="flex items-center gap-1.5 text-xs text-[#D4F63C] font-mono">
                   <RefreshCw className="w-3.5 h-3.5 animate-spin" /> Evaluating...
                 </div>
               )}
@@ -531,7 +527,7 @@ export const CSVBatchUploader: React.FC<CSVBatchUploaderProps> = ({
           <CardContent className="p-0">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs font-mono">
-                <thead className="bg-zinc-900/90 text-zinc-400 border-b border-zinc-800 tracking-wider uppercase text-[11px]">
+                <thead className="bg-[#13171D] text-[#7E8B9B] border-b border-[#2A3241] tracking-wider uppercase text-[11px]">
                   <tr>
                     <th className="py-3 px-3">#</th>
                     <th className="py-3 px-3">Machine ID</th>
@@ -547,7 +543,7 @@ export const CSVBatchUploader: React.FC<CSVBatchUploaderProps> = ({
                     <th className="py-3 px-3 text-right">Action</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-zinc-800/80 text-zinc-200">
+                <tbody className="divide-y divide-[#2A3241] text-[#EDEDED]">
                   {filteredRows.map((row, idx) => {
                     const prob = row.predictionResult?.failure_probability ?? 0;
                     const unc = row.predictionResult?.uncertainty_std ?? 0;
@@ -557,42 +553,42 @@ export const CSVBatchUploader: React.FC<CSVBatchUploaderProps> = ({
                     return (
                       <tr
                         key={row.id}
-                        className={`transition-colors hover:bg-zinc-800/60 ${
+                        className={`transition-colors hover:bg-[#13171D] ${
                           isHazard
-                            ? "bg-red-950/20 border-l-2 border-l-red-500"
+                            ? "bg-[#FF3B30]/10 border-l-2 border-l-[#FF3B30]"
                             : isUncertain
-                            ? "bg-amber-950/15 border-l-2 border-l-amber-500"
+                            ? "bg-[#F5A623]/10 border-l-2 border-l-[#F5A623]"
                             : ""
                         }`}
                       >
-                        <td className="py-2.5 px-3 text-zinc-500">{row.rowIndex}</td>
-                        <td className="py-2.5 px-3 font-bold text-zinc-100 flex items-center gap-1.5">
+                        <td className="py-2.5 px-3 text-[#7E8B9B]">{row.rowIndex}</td>
+                        <td className="py-2.5 px-3 font-bold text-[#EDEDED] flex items-center gap-1.5">
                           {row.machineId}
                           {isHazard && (
-                            <span className="w-2 h-2 rounded-full bg-red-500 animate-ping shrink-0" />
+                            <span className="w-2 h-2 rounded-full bg-[#FF3B30] shrink-0" />
                           )}
                         </td>
                         <td className="py-2.5 px-3">
-                          <span className="px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 font-bold text-[10px]">
+                          <span className="px-1.5 py-0.5 rounded bg-[#13171D] border border-[#2A3241] text-[#EDEDED] font-bold text-[10px]">
                             {row.type}
                           </span>
                         </td>
-                        <td className="py-2.5 px-3 text-right text-zinc-300">{row.air_temperature.toFixed(1)}</td>
-                        <td className="py-2.5 px-3 text-right text-zinc-300">{row.process_temperature.toFixed(1)}</td>
-                        <td className="py-2.5 px-3 text-right text-cyan-300">{row.rotational_speed.toFixed(0)}</td>
-                        <td className="py-2.5 px-3 text-right text-zinc-300">{row.torque.toFixed(1)}</td>
-                        <td className="py-2.5 px-3 text-right text-zinc-300">{row.tool_wear.toFixed(0)}</td>
+                        <td className="py-2.5 px-3 text-right text-[#EDEDED]">{row.air_temperature.toFixed(1)}</td>
+                        <td className="py-2.5 px-3 text-right text-[#EDEDED]">{row.process_temperature.toFixed(1)}</td>
+                        <td className="py-2.5 px-3 text-right text-[#D4F63C]">{row.rotational_speed.toFixed(0)}</td>
+                        <td className="py-2.5 px-3 text-right text-[#EDEDED]">{row.torque.toFixed(1)}</td>
+                        <td className="py-2.5 px-3 text-right text-[#EDEDED]">{row.tool_wear.toFixed(0)}</td>
                         <td className="py-2.5 px-3 text-center">
                           <span
                             className={`font-bold ${
-                              prob > 0.65 ? "text-red-400" : prob > 0.35 ? "text-amber-400" : "text-emerald-400"
+                              prob > 0.65 ? "text-[#FF3B30]" : prob > 0.35 ? "text-[#F5A623]" : "text-[#D4F63C]"
                             }`}
                           >
                             {(prob * 100).toFixed(1)}%
                           </span>
                         </td>
                         <td className="py-2.5 px-3 text-center">
-                          <span className={`font-medium ${unc > 0.08 ? "text-amber-300 font-bold" : "text-zinc-400"}`}>
+                          <span className={`font-medium ${unc > 0.08 ? "text-[#F5A623] font-bold" : "text-[#7E8B9B]"}`}>
                             ±{unc.toFixed(3)}
                           </span>
                         </td>
@@ -611,7 +607,7 @@ export const CSVBatchUploader: React.FC<CSVBatchUploaderProps> = ({
                               {row.failureMode.code}
                             </Badge>
                           ) : (
-                            <span className="text-zinc-500">—</span>
+                            <span className="text-[#7E8B9B]">—</span>
                           )}
                         </td>
                         <td className="py-2.5 px-3 text-right">
@@ -630,7 +626,7 @@ export const CSVBatchUploader: React.FC<CSVBatchUploaderProps> = ({
                                     type: row.type,
                                   })
                                 }
-                                className="p-1 rounded bg-zinc-800 hover:bg-cyan-500/20 text-zinc-400 hover:text-cyan-300 border border-zinc-700 transition-colors"
+                                className="p-1 rounded bg-[#13171D] hover:bg-[#181D24] text-[#7E8B9B] hover:text-[#D4F63C] border border-[#2A3241] transition-colors"
                               >
                                 <Play className="w-3 h-3" />
                               </button>
@@ -655,7 +651,7 @@ export const CSVBatchUploader: React.FC<CSVBatchUploaderProps> = ({
             </div>
 
             {filteredRows.length === 0 && (
-              <div className="py-12 text-center text-zinc-500 text-xs font-mono">
+              <div className="py-12 text-center text-[#7E8B9B] text-xs font-mono">
                 No telemetry records match the active filter criteria.
               </div>
             )}

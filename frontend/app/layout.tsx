@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Providers } from "./providers";
+import { TechnicalBackground } from "@/components/TechnicalBackground";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "TrustAI-PM — Explainable & Uncertainty-Aware Predictive Maintenance",
   description:
-    "Enterprise Bayesian Deep Learning (Monte Carlo Dropout) and SHAP-powered industrial predictive maintenance dashboard with VengeanceUI.",
+    "Stealth-industrial Bayesian Deep Learning (Monte Carlo Dropout) and SHAP-powered predictive maintenance engineering dashboard.",
 };
 
 export default function RootLayout({
@@ -15,8 +16,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className="bg-industrial-glow text-slate-100 min-h-screen antialiased selection:bg-cyan-500/30 selection:text-cyan-200">
-        <Providers>{children}</Providers>
+      <body className="bg-[#0D0F12] text-[#EDEDED] min-h-screen antialiased selection:bg-[#D4F63C] selection:text-[#0D0F12] relative overflow-x-hidden">
+        {/* Contained, Grounded Technical Backdrop with Zero Pointer Events */}
+        <TechnicalBackground />
+
+        {/* Solid High-Contrast Grounded Application Content (z-index: 10) */}
+        <div className="relative z-10 min-h-screen">
+          <Providers>{children}</Providers>
+        </div>
       </body>
     </html>
   );

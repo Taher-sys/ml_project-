@@ -41,18 +41,18 @@ export const SafetyMeasuresPanel: React.FC<SafetyMeasuresPanelProps> = ({
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="rounded-2xl p-5 border border-amber-500/40 bg-amber-950/20 backdrop-blur-xl shadow-xl space-y-4"
+      className="rounded-lg p-5 border border-[#2A3241] bg-[#181D24] shadow-md space-y-4"
     >
-      <div className="flex items-center gap-3 pb-3 border-b border-amber-500/20">
-        <div className="p-2 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 shadow-md">
-          <ShieldAlert className="w-5 h-5 text-amber-400" />
+      <div className="flex items-center gap-3 pb-3 border-b border-[#2A3241]">
+        <div className="p-2 rounded bg-[#13171D] border border-[#FF3B30]/40 text-[#FF3B30] shadow-sm">
+          <ShieldAlert className="w-5 h-5 text-[#FF3B30]" />
         </div>
         <div>
-          <h3 className="text-sm md:text-base font-bold text-zinc-100 tracking-tight font-mono">
+          <h3 className="text-sm md:text-base font-bold text-[#EDEDED] tracking-tight font-mono">
             Safety Measures & Isolation Checklist
           </h3>
-          <p className="text-xs text-zinc-400">
-            Mandatory safety steps before maintenance servicing or restart
+          <p className="text-xs text-[#7E8B9B]">
+            Mandatory safety protocols before maintenance servicing or machine restart
           </p>
         </div>
       </div>
@@ -62,9 +62,9 @@ export const SafetyMeasuresPanel: React.FC<SafetyMeasuresPanelProps> = ({
           <motion.li
             key={idx}
             variants={itemVariants}
-            className="flex items-start gap-2.5 p-3 rounded-xl bg-zinc-900/80 border border-zinc-800 hover:border-amber-500/40 transition-colors text-xs text-zinc-200 font-mono"
+            className="flex items-start gap-2.5 p-3 rounded bg-[#13171D] border border-[#212631] hover:border-[#D4F63C]/50 transition-colors text-xs text-[#EDEDED] font-mono"
           >
-            <CheckSquare className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+            <CheckSquare className="w-4 h-4 text-[#D4F63C] shrink-0 mt-0.5" />
             <span className="leading-relaxed">{measure}</span>
           </motion.li>
         ))}

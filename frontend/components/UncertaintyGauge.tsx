@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { HelpCircle, Cpu, ShieldCheck, AlertCircle } from "lucide-react";
+import { HelpCircle, Cpu } from "lucide-react";
 
 interface UncertaintyGaugeProps {
   confidenceScore: number;
@@ -21,19 +21,19 @@ export const UncertaintyGauge: React.FC<UncertaintyGaugeProps> = ({
   const needleAngle = -90 + (scorePercent / 100) * 180;
 
   return (
-    <div className="rounded-2xl p-6 border border-zinc-800 bg-zinc-950/80 backdrop-blur-xl shadow-xl relative overflow-hidden flex flex-col justify-between">
+    <div className="rounded-xl p-6 border border-[#2A3241] bg-[#181D24] shadow-sm relative overflow-hidden flex flex-col justify-between">
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2">
-          <div className="p-1.5 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
+          <div className="p-1.5 rounded-lg bg-[#13171D] border border-[#2A3241] text-[#D4F63C]">
             <Cpu className="w-4 h-4" />
           </div>
-          <h3 className="text-xs font-bold text-zinc-200 uppercase tracking-widest font-mono">
+          <h3 className="text-xs font-bold text-[#EDEDED] uppercase tracking-widest font-mono">
             Bayesian Confidence Gauge
           </h3>
         </div>
         <div className="group relative cursor-pointer">
-          <HelpCircle className="w-4 h-4 text-zinc-500 hover:text-cyan-400 transition-colors" />
-          <div className="absolute right-0 top-6 w-64 p-3 bg-zinc-900 border border-zinc-700/80 rounded-xl text-xs text-zinc-300 shadow-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-30 font-mono">
+          <HelpCircle className="w-4 h-4 text-[#7E8B9B] hover:text-[#D4F63C] transition-colors" />
+          <div className="absolute right-0 top-6 w-64 p-3 bg-[#13171D] border border-[#2A3241] rounded-lg text-xs text-[#EDEDED] shadow-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-30 font-mono">
             <strong>Monte Carlo Dropout:</strong> 50 stochastic forward passes with dropout active at inference time. Higher confidence = lower epistemic uncertainty (σ).
           </div>
         </div>
@@ -45,7 +45,7 @@ export const UncertaintyGauge: React.FC<UncertaintyGaugeProps> = ({
           <path
             d="M 10 80 A 70 70 0 0 1 150 80"
             fill="none"
-            stroke="#1e293b"
+            stroke="#212631"
             strokeWidth="14"
             strokeLinecap="round"
           />
@@ -53,20 +53,20 @@ export const UncertaintyGauge: React.FC<UncertaintyGaugeProps> = ({
           <motion.path
             d="M 10 80 A 70 70 0 0 1 150 80"
             fill="none"
-            stroke="url(#vngGaugeGradient)"
+            stroke="url(#stealthGaugeGradient)"
             strokeWidth="14"
             strokeLinecap="round"
             strokeDasharray={circumference}
             initial={{ strokeDashoffset: circumference }}
             animate={{ strokeDashoffset }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
           />
 
           <defs>
-            <linearGradient id="vngGaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#f43f5e" />
-              <stop offset="50%" stopColor="#f59e0b" />
-              <stop offset="100%" stopColor="#06b6d4" />
+            <linearGradient id="stealthGaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#FF3B30" />
+              <stop offset="50%" stopColor="#F5A623" />
+              <stop offset="100%" stopColor="#D4F63C" />
             </linearGradient>
           </defs>
 
@@ -74,30 +74,30 @@ export const UncertaintyGauge: React.FC<UncertaintyGaugeProps> = ({
           <motion.g
             initial={{ rotate: -90 }}
             animate={{ rotate: needleAngle }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             style={{ transformOrigin: "80px 80px" }}
           >
-            <line x1="80" y1="80" x2="80" y2="22" stroke="#f8fafc" strokeWidth="3" strokeLinecap="round" />
-            <circle cx="80" cy="80" r="6" fill="#06b6d4" stroke="#f8fafc" strokeWidth="2" />
+            <line x1="80" y1="80" x2="80" y2="22" stroke="#EDEDED" strokeWidth="2.5" strokeLinecap="round" />
+            <circle cx="80" cy="80" r="5" fill="#D4F63C" stroke="#0D0F12" strokeWidth="2" />
           </motion.g>
         </svg>
 
         <div className="text-center -mt-2">
-          <span className="text-3xl font-black text-zinc-100 font-mono-numeric tracking-tight">
+          <span className="text-3xl font-black text-[#EDEDED] font-mono-numeric tracking-tight">
             {scorePercent.toFixed(1)}%
           </span>
-          <p className="text-[11px] text-zinc-400 font-mono">Epistemic Certainty</p>
+          <p className="text-[11px] text-[#7E8B9B] font-mono">Epistemic Certainty</p>
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-2 text-center pt-3 border-t border-zinc-800 text-xs font-mono">
-        <div className="bg-zinc-900/80 p-2 rounded-xl border border-zinc-800">
-          <span className="text-zinc-500 block text-[10px] uppercase font-semibold">Std Dev (σ)</span>
-          <span className="text-cyan-400 font-mono-numeric font-bold">{uncertaintyStd.toFixed(4)}</span>
+      <div className="grid grid-cols-2 gap-2 text-center pt-3 border-t border-[#2A3241] text-xs font-mono">
+        <div className="bg-[#13171D] p-2 rounded-lg border border-[#212631]">
+          <span className="text-[#7E8B9B] block text-[10px] uppercase font-semibold">Std Dev (σ)</span>
+          <span className="text-[#D4F63C] font-mono-numeric font-bold">{uncertaintyStd.toFixed(4)}</span>
         </div>
-        <div className="bg-zinc-900/80 p-2 rounded-xl border border-zinc-800">
-          <span className="text-zinc-500 block text-[10px] uppercase font-semibold">Reliability</span>
-          <span className={`font-bold ${scorePercent >= 70 ? "text-emerald-400" : "text-amber-400"}`}>
+        <div className="bg-[#13171D] p-2 rounded-lg border border-[#212631]">
+          <span className="text-[#7E8B9B] block text-[10px] uppercase font-semibold">Reliability</span>
+          <span className={`font-bold ${scorePercent >= 70 ? "text-[#D4F63C]" : "text-[#F5A623]"}`}>
             {scorePercent >= 70 ? "High Trust" : "Elevated Variance"}
           </span>
         </div>

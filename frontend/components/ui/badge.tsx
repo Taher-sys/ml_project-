@@ -2,7 +2,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
-  variant?: "default" | "secondary" | "destructive" | "warning" | "success" | "outline" | "cyan";
+  variant?: "default" | "secondary" | "destructive" | "warning" | "success" | "outline" | "cyan" | "volt";
   size?: "default" | "sm" | "lg";
 }
 
@@ -14,13 +14,14 @@ export function Badge({
   ...props
 }: BadgeProps) {
   const variantStyles = {
-    default: "border-zinc-700 bg-zinc-800 text-zinc-100",
-    secondary: "border-zinc-800 bg-zinc-900/90 text-zinc-300",
-    destructive: "border-red-500/40 bg-red-500/15 text-red-400 shadow-sm shadow-red-500/20",
-    warning: "border-amber-500/40 bg-amber-500/15 text-amber-300 shadow-sm shadow-amber-500/20",
-    success: "border-emerald-500/40 bg-emerald-500/15 text-emerald-400 shadow-sm shadow-emerald-500/20",
-    outline: "border-zinc-700 text-zinc-300 bg-transparent",
-    cyan: "border-cyan-500/40 bg-cyan-500/15 text-cyan-300 shadow-sm shadow-cyan-500/20",
+    default: "border-[#2A3241] bg-[#181D24] text-[#EDEDED]",
+    secondary: "border-[#212631] bg-[#13171D] text-[#7E8B9B]",
+    destructive: "border-[#FF3B30]/50 bg-[#FF3B30]/10 text-[#FF3B30]",
+    warning: "border-[#F5A623]/50 bg-[#F5A623]/10 text-[#F5A623]",
+    success: "border-[#D4F63C]/40 bg-[#D4F63C]/10 text-[#D4F63C]",
+    outline: "border-[#2A3241] text-[#7E8B9B] bg-transparent",
+    cyan: "border-[#D4F63C]/40 bg-[#D4F63C]/10 text-[#D4F63C]",
+    volt: "border-[#D4F63C]/40 bg-[#D4F63C]/10 text-[#D4F63C]",
   }[variant];
 
   const sizeStyles = {
@@ -32,7 +33,7 @@ export function Badge({
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-full border font-medium transition-colors font-mono-numeric tracking-wide",
+        "inline-flex items-center gap-1.5 rounded-md border font-mono font-medium tracking-tight",
         variantStyles,
         sizeStyles,
         className
